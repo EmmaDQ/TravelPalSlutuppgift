@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace TravelPalSlutuppgift
 {
@@ -10,16 +8,12 @@ namespace TravelPalSlutuppgift
     public partial class MainWindow : Window
     {
 
-        List<User> users = new List<User>
-        {
-            new User("username", "password", Countrys.Sweden),
-        };
-
-
         public MainWindow()
         {
             InitializeComponent();
 
+
+            //Fyller comboboxen men länder
             foreach (var country in Countrys.GetValues(typeof(Countrys)))
             {
                 cbxChooseCountryMain.Items.Add(country);
@@ -35,68 +29,46 @@ namespace TravelPalSlutuppgift
 
         private void btnLogOrRegister_Click(object sender, RoutedEventArgs e)
         {
+            UserManager manager = new();
+
+            //Vill logga in
             if (cbNoAccount.IsChecked == false)
             {
 
-                //Går igenom listan och kollar om det finns en match i username och lösenord
-                //Öppnar då nästa fönster
-                foreach (User user in users)
-                {
-                    if (txtUserName.Text == user.UserName && txtPassword.Text == user.Password)
-                    {
-                        TravelsWindow travelwin = new TravelsWindow();
-
-                        travelwin.Show();
-
-                        Close();
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Something went wrong, please type in correct information!", "User not found");
-                    }
-                }
+                manager.SignInUser(txtUserName.Text, txtPassword.Text);
             }
 
             else
             {
+                Countrys country = (Countrys)cbxChooseCountryMain.SelectedItem;
+
+
+                if (cbxChooseCountryMain.SelectedIndex != 0)
+                {
+                    manager.RegisterUser(txtUserName.Text, txtPassword.Text, txtPasswordAgain.Text, country);
+                }
+
+                else
+                {
+                    MessageBox.Show("Please choose a country of origin!", "No country selected");
+                }
+
+
                 //Checkbox är ibockad och användaren vill registrera sig
                 //Lägg till användare i listan av users
 
-                if (!string.IsNullOrEmpty(txtPassword.Text.Trim()) && !string.IsNullOrEmpty(txtPasswordAgain.Text.Trim()) && !string.IsNullOrEmpty(txtUserName.Text.Trim()) && cbxChooseCountryMain.SelectedIndex != 0)
-                {
-                    if (txtPassword.Text == txtPasswordAgain.Text)
-                    {
-                        ComboBox chooseCountry = new ComboBox();
-                        ComboBox selectedItem = (ComboBox)chooseCountry.SelectedItem;
 
 
 
-                        Countrys country = (Countrys)selectedItem.Tag;
-
-
-                        User user = new(txtUserName.Text, txtPasswordAgain.Text, country);
-
-                        foreach (User user2 in users)
-                        {
-                            if (user2 == user)
-                            {
-                                MessageBox.Show("Username and or password is allready taken");
-                            }
-
-                            else
-                            {
-                                users.Add(user);
-                            }
-                        }
-
-                    }
-
-                    else MessageBox.Show("Your passwords doen't match, please try again", "Password discreppency");
-                }
-
-                else MessageBox.Show("Please fill in all the details!", "Empty boxes");
+                /*{
+                    MessageBox.Show("Username and or password is allready taken");
+                }*/
             }
+
+
+
+
+
         }
 
         private void cbNoAccount_Checked(object sender, RoutedEventArgs e)
