@@ -1,0 +1,33 @@
+﻿namespace TravelPalSlutuppgift
+{
+    internal enum EuCountrys
+    {
+        Austria,
+        Belgium,
+        Bulgaria,
+        Croatia,
+        Cyprus,
+        Czech_Republic,
+        Denmark,
+        Estonia,
+        Finland,
+        France,
+        Germany,
+        Greece,
+        Hungary,
+        Ireland,
+        Italy,
+        Latvia,
+        Lithuania,
+        Luxembourg,
+        Malta,
+        The_Netherlands,
+        Poland,
+        Portugal,
+        Romania,
+        Slovakia,
+        Slovenia,
+        Spain,
+        Sweden
+    }
+}
