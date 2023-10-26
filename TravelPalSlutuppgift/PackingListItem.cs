@@ -1,6 +1,6 @@
 ﻿namespace TravelPalSlutuppgift
 {
-    internal class PackingListItem
+    internal interface PackingListItem
     {
         public string? Name { get; set; }
 

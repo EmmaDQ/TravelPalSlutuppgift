@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TravelPalSlutuppgift
 {
@@ -22,6 +11,41 @@ namespace TravelPalSlutuppgift
         public TravelsWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lstTravelInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

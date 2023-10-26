@@ -31,11 +31,17 @@ namespace TravelPalSlutuppgift
         {
             UserManager manager = new();
 
+
             //Vill logga in
             if (cbNoAccount.IsChecked == false)
             {
+                bool isUser = manager.SignInUser(txtUserName.Text, txtPassword.Text);
 
-                manager.SignInUser(txtUserName.Text, txtPassword.Text);
+                if (isUser)
+                {
+                    Close();
+                }
+
             }
 
             else
@@ -45,7 +51,14 @@ namespace TravelPalSlutuppgift
 
                 if (cbxChooseCountryMain.SelectedIndex != 0)
                 {
-                    manager.RegisterUser(txtUserName.Text, txtPassword.Text, txtPasswordAgain.Text, country);
+                    bool isRegisterd = manager.RegisterUser(txtUserName.Text, txtPassword.Text, txtPasswordAgain.Text, country);
+
+
+                    if (isRegisterd)
+                    {
+                        Close();
+
+                    }
                 }
 
                 else
@@ -89,7 +102,7 @@ namespace TravelPalSlutuppgift
 
 
             //Ändras inte tillbaka när man checkar av boxen igen.. Kolla in detta sen!!
-            if (cbNoAccount.IsChecked == false)
+            else
             {
                 lblHeader.Content = "Log in";
                 btnLogOrRegister.Content = "Sign in";

@@ -18,7 +18,6 @@ namespace TravelPalSlutuppgift
         public bool AddingUser(IUser user)
         {
 
-
             users.Add(user);
 
             return true;
@@ -39,9 +38,15 @@ namespace TravelPalSlutuppgift
 
         private bool UserName(string? username)
         {
+
             if (!string.IsNullOrWhiteSpace(username.Trim()))
             {
-                return true;
+                foreach (IUser user in users)
+                {
+                    if (username.Trim() == user.UserName)
+                        return true;
+                }
+
             }
 
             return false;
@@ -51,33 +56,40 @@ namespace TravelPalSlutuppgift
 
         public bool SignInUser(string username, string password)
         {
+            bool isUser = UserName(username);
             //Går igenom listan och kollar om det finns en match i username och lösenord
             //Öppnar då nästa fönster
 
-            foreach (IUser user in users)
+            if (isUser)
             {
-                if (username == user.UserName && password == user.Password)
+                foreach (IUser user in users)
                 {
-                    TravelsWindow travelwin = new TravelsWindow();
+                    if (password == user.Password)
+                    {
+                        SignedInUser = user;
 
-                    travelwin.Show();
+                        TravelsWindow travelwin = new TravelsWindow();
 
+                        travelwin.Show();
 
-                    MainWindow main = new MainWindow();
+                        return true;
 
-                    main.Close();
+                    }
 
-                    return true;
+                    else
+                    {
+                        MessageBox.Show("Password not correct, please type in correct password!", "Wrong password");
+                    }
+
 
                 }
-
-                else
-                {
-                    MessageBox.Show("Something went wrong, please type in correct information!", "User not found");
-                }
-
-
             }
+
+            else
+            {
+                MessageBox.Show("Username not found, please type in correct username!", "User not found");
+            }
+
 
             return false;
 
@@ -92,29 +104,45 @@ namespace TravelPalSlutuppgift
 
                 if (password == passwordAgain)
                 {
-                    IUser user2 = new User(username, passwordAgain, country);
-
-
-                    for (int i = 0; i < users.Count; i++)
+                    foreach (IUser user in users)
                     {
-                        AddingUser(user2);
+                        if (username != user.UserName)
+                        {
+                            IUser user2 = new User(username, passwordAgain, country);
 
-                        TravelsWindow travelsWindow = new TravelsWindow();
-                        travelsWindow.Show();
+                            AddingUser(user2);
 
-                        MainWindow main = new MainWindow();
-                        main.Close();
+                            TravelsWindow travelsWindow = new TravelsWindow();
+                            travelsWindow.Show();
 
-                        break;
+
+                            return true;
+
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Username already taken, please try again!", "Error username taken");
+
+                            return false;
+                        }
+
+
                     }
-                    return true;
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Your passwords did not match, please try again", "Password error");
+                    return false;
                 }
 
             }
 
             else
             {
-                MessageBox.Show("");
+                MessageBox.Show("Please fill out all the information with characters of your choosing", "No information found");
             }
 
             return false;

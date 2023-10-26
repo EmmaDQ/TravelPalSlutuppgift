@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace TravelPalSlutuppgift
 {
     internal class Travel
@@ -7,8 +8,7 @@ namespace TravelPalSlutuppgift
         public string Destination { get; set; }
         public Countrys Country { get; set; }
         public int Travelers { get; set; }
-
-        //public List <PackingListItem> packingList = new List<PackingListItem> ();
+        public System.Collections.Generic.List<PackingListItem> PackingList { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
