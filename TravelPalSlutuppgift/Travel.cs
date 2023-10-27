@@ -1,14 +1,14 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace TravelPalSlutuppgift
 {
-    internal class Travel
+    public class Travel
     {
         public string DestinationCity { get; set; }
         public Countrys Country { get; set; }
         public int Travelers { get; set; }
-        public System.Collections.Generic.List<PackingListItem> PackingList { get; set; }
+        public List<PackingListItem> PackingList { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }

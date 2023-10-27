@@ -4,10 +4,10 @@ namespace TravelPalSlutuppgift
 {
     internal class TravelManager
     {
-        public List<Travel> Travels { get; set; } = new List<Travel>()
+        public static List<Travel> Travels { get; set; } = new()
             {
-                new Travel("Tokyo", Countrys.Japan, 2),
-                new Travel("Helsinki", Countrys.Finland, 1),
+                new WorkTrip("Tokyo", Countrys.Japan, 2, "Big time boss meeting with high up clients"),
+                new Vacation("Helsinki", Countrys.Finland, 1, true),
 
             };
 

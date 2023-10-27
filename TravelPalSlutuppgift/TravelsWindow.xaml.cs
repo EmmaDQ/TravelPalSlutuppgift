@@ -12,18 +12,21 @@ namespace TravelPalSlutuppgift
         TravelManager tManager = new TravelManager();
         UserManager uManager = new UserManager();
 
+        private Travel _travel;
 
-
-        private IUser _user;
 
         public TravelsWindow(IUser user)
         {
 
             InitializeComponent();
-            _user = user;
+
 
             //Får inte SignedInUser att fungera, vill inte uppdatera från null.. Löste texten på detta sättet istället genom att skicka info genom konstruktorn
+            //lblTitleTravelWin.Content = $"Welcome {uManager.SignedInUser.UserName}";
+
+
             lblTitleTravelWin.Content = $"Welcome {user.UserName} from {user.Location}";
+
 
             UpdateUI();
 
@@ -112,6 +115,20 @@ namespace TravelPalSlutuppgift
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
+            ListBoxItem? selectedItem = (ListBoxItem)lstTravelInfo.SelectedItem;
+
+            if (selectedItem != null)
+            {
+                Travel travel = (Travel)selectedItem.Tag;
+
+                TravelDetailsWindow trvlDetailsWin = new TravelDetailsWindow(travel);
+
+                trvlDetailsWin.Show();
+
+                Close();
+
+            }
+
 
         }
 

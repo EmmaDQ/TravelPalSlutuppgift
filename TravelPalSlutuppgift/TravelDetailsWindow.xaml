@@ -118,7 +118,7 @@ FontFamily="Yu Mincho"/>
   Grid.Column="2"
   Margin="10,10,10,10" 
   FontFamily="Yu Mincho Light" 
-  FontSize="24" 
+  FontSize="18" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtPeopleTravelingTD"
@@ -126,35 +126,35 @@ FontFamily="Yu Mincho"/>
   Grid.Column="2"
   Margin="10,10,150,10" 
   FontFamily="Yu Mincho Light" 
-  FontSize="24" 
+  FontSize="18" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtMeetingDetailsTD" Grid.Row="8"
   Grid.Column="2"
   Margin="10,10,10,10" 
   FontFamily="Yu Mincho Light" 
-  FontSize="24" 
+  FontSize="20" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtTravelItemTD" Grid.Row="9"
   Grid.Column="2"
   Margin="10,10,10,10" 
   FontFamily="Yu Mincho Light" 
-  FontSize="24" 
+  FontSize="18" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtQuantityTD" Grid.Row="12"
   Grid.Column="2"
   Margin="10,10,150,10" 
   FontFamily="Yu Mincho Light" 
-  FontSize="24" 
+  FontSize="18" 
   TextWrapping="Wrap"/>
 
         <ComboBox x:Name="cbxDestinationTD" Grid.Row="3"
    Grid.Column="2"
    Margin="10" 
    FontFamily="Yu Mincho" 
-   FontSize="24" 
+   FontSize="14" 
    />
 
         <ComboBox x:Name="cbxPurposeTD" Grid.Row="7"
