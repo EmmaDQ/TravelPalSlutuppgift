@@ -29,13 +29,18 @@ namespace TravelPalSlutuppgift
 
         private void btnLogOrRegister_Click(object sender, RoutedEventArgs e)
         {
+            string username = txtUserName.Text.Trim();
+            string password = txtPassword.Text.Trim();
+            string passwordAgain = txtPasswordAgain.Text.Trim();
+
+
             UserManager manager = new();
 
 
             //Vill logga in
             if (cbNoAccount.IsChecked == false)
             {
-                bool isUser = manager.SignInUser(txtUserName.Text, txtPassword.Text);
+                bool isUser = manager.SignInUser(username, password);
 
                 if (isUser)
                 {
@@ -51,7 +56,7 @@ namespace TravelPalSlutuppgift
 
                 if (cbxChooseCountryMain.SelectedIndex != 0)
                 {
-                    bool isRegisterd = manager.RegisterUser(txtUserName.Text, txtPassword.Text, txtPasswordAgain.Text, country);
+                    bool isRegisterd = manager.RegisterUser(username, password, passwordAgain, country);
 
 
                     if (isRegisterd)

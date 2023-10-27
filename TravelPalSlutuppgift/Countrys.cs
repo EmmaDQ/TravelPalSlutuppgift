@@ -1,6 +1,6 @@
 ﻿namespace TravelPalSlutuppgift
 {
-    internal enum Countrys
+    public enum Countrys
     {
         Choose_your_country,
         Algeria,

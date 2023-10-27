@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace TravelPalSlutuppgift
+﻿namespace TravelPalSlutuppgift
 {
     internal class WorkTrip : Travel
     {
         public string MeetingDetails { get; set; }
 
-        public WorkTrip(string destination, Countrys country, int travelers, DateTime start, DateTime end, int traveldays, string meetingDetails) : base(destination, country, travelers, start, end, traveldays)
+        public WorkTrip(string destination, Countrys country, int travelers, string meetingDetails) : base(destination, country, travelers)
         {
             MeetingDetails = meetingDetails;
         }

@@ -5,10 +5,12 @@ namespace TravelPalSlutuppgift
 {
     internal class UserManager
     {
-        public List<IUser> users = new List<IUser>()
+        public static List<IUser> Users { get; set; } = new()
 
         {
             new Admin("username", "password", Countrys.Sweden),
+            new User("kalle88", "hej", Countrys.Canada),
+            new User("kawaii", "hej", Countrys.Japan),
 
         };
 
@@ -18,7 +20,7 @@ namespace TravelPalSlutuppgift
         public bool AddingUser(IUser user)
         {
 
-            users.Add(user);
+            Users.Add(user);
 
             return true;
         }
@@ -26,24 +28,33 @@ namespace TravelPalSlutuppgift
 
         public void RemoveUser(IUser user)
         {
-
+            Users.Remove(user);
         }
 
 
         public bool UppdateUserName(IUser user, string newUser)
         {
-            return true;
+            bool isTaken = UserName(newUser.Trim());
+
+            if (!isTaken)
+            {
+                user.UserName = newUser;
+                return true;
+            }
+
+            return false;
+
         }
 
 
         private bool UserName(string? username)
         {
 
-            if (!string.IsNullOrWhiteSpace(username.Trim()))
+            if (!string.IsNullOrWhiteSpace(username))
             {
-                foreach (IUser user in users)
+                foreach (IUser user in Users)
                 {
-                    if (username.Trim() == user.UserName)
+                    if (user.UserName == username)
                         return true;
                 }
 
@@ -62,13 +73,16 @@ namespace TravelPalSlutuppgift
 
             if (isUser)
             {
-                foreach (IUser user in users)
+                foreach (IUser user in Users)
                 {
-                    if (password == user.Password)
+                    if (user.UserName == username && user.Password == password)
                     {
-                        SignedInUser = user;
+                        //SignedInUser sätts till null här.. Fixa det!
+                        //
+                        //
+                        SignedInUser = user;    //<------------------
 
-                        TravelsWindow travelwin = new TravelsWindow();
+                        TravelsWindow travelwin = new TravelsWindow(user);
 
                         travelwin.Show();
 
@@ -76,18 +90,15 @@ namespace TravelPalSlutuppgift
 
                     }
 
-                    else
-                    {
-                        MessageBox.Show("Password not correct, please type in correct password!", "Wrong password");
-                    }
-
-
                 }
+                MessageBox.Show("Password not correct, please type in correct password!", "Wrong password");
+                return false;
             }
 
             else
             {
                 MessageBox.Show("Username not found, please type in correct username!", "User not found");
+                return false;
             }
 
 
@@ -98,21 +109,25 @@ namespace TravelPalSlutuppgift
 
         public bool RegisterUser(string username, string password, string passwordAgain, Countrys country)
         {
-            if (!string.IsNullOrEmpty(password.Trim()) && !string.IsNullOrEmpty(passwordAgain.Trim()) && !string.IsNullOrEmpty(username.Trim()))
+            if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(passwordAgain) && !string.IsNullOrEmpty(username))
             {
 
 
                 if (password == passwordAgain)
                 {
-                    foreach (IUser user in users)
+                    foreach (IUser user in Users)
                     {
                         if (username != user.UserName)
                         {
-                            IUser user2 = new User(username, passwordAgain, country);
+                            IUser newUser = new User(username, password, country);
 
-                            AddingUser(user2);
 
-                            TravelsWindow travelsWindow = new TravelsWindow();
+                            AddingUser(newUser);
+
+                            //Registrerar inte värdet av newUser..
+                            SignedInUser = newUser;
+
+                            TravelsWindow travelsWindow = new TravelsWindow(newUser);
                             travelsWindow.Show();
 
 

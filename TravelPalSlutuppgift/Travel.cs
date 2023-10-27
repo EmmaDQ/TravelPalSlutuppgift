@@ -5,7 +5,7 @@ namespace TravelPalSlutuppgift
 {
     internal class Travel
     {
-        public string Destination { get; set; }
+        public string DestinationCity { get; set; }
         public Countrys Country { get; set; }
         public int Travelers { get; set; }
         public System.Collections.Generic.List<PackingListItem> PackingList { get; set; }
@@ -14,14 +14,12 @@ namespace TravelPalSlutuppgift
         public int TravelDays { get; set; }
 
 
-        public Travel(string destination, Countrys country, int travelers, DateTime start, DateTime end, int traveldays)
+        public Travel(string destination, Countrys country, int travelers)
         {
-            Destination = destination;
+            DestinationCity = destination;
             Country = country;
             Travelers = travelers;
-            StartDate = start;
-            EndDate = end;
-            TravelDays = traveldays;
+
         }
 
 
@@ -32,6 +30,8 @@ namespace TravelPalSlutuppgift
 
         private int CalculateTravelDays()
         {
+            /*int daysTraveling = StartDate - EndDate;
+            TravelDays = daysTraveling;*/
             return 0;
         }
     }
