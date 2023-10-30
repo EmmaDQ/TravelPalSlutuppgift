@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TravelPalSlutuppgift
+﻿namespace TravelPalSlutuppgift
 {
     internal class User : IUser
     {
@@ -9,7 +7,7 @@ namespace TravelPalSlutuppgift
         public Countrys Location { get; set; }
 
 
-        public List<Travel> travels = new List<Travel>();
+        //public List<Travel> travels = new List<Travel>();
 
 
         public User(string username, string password, Countrys country)

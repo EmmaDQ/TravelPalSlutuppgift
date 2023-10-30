@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace TravelPalSlutuppgift
@@ -9,43 +8,76 @@ namespace TravelPalSlutuppgift
     /// </summary>
     public partial class TravelDetailsWindow : Window
     {
-        TravelManager tManager = new TravelManager();
+        //TravelManager tManager = new();
         public TravelDetailsWindow(Travel travel)
         {
             InitializeComponent();
 
-            //lblMeetingDetailsTD.Visibility = Visibility.Hidden;
-            //txtMeetingDetailsTD.Visibility = Visibility.Hidden;
-            cbAllInclusiveTD.Visibility = Visibility.Hidden;
-            txtQuantityTD.Visibility = Visibility.Hidden;
-            cbRequiredTD.Visibility = Visibility.Hidden;
+
+            if (travel.GetType() == typeof(Vacation))
+            {
+                Vacation vacTravel = (Vacation)travel;
+
+                lblMeetingDetailsTD.Visibility = Visibility.Hidden;
+                txtMeetingDetailsTD.Visibility = Visibility.Hidden;
+                txtQuantityTD.Visibility = Visibility.Hidden;
+                cbRequiredTD.Visibility = Visibility.Hidden;
+
+                txtCityTD.Text = vacTravel.DestinationCity;
+                txtCityTD.IsEnabled = false;
+
+                txtPeopleTravelingTD.Text = vacTravel.Travelers.ToString();
+                txtPeopleTravelingTD.IsEnabled = false;
+
+                cbAllInclusiveTD.IsChecked = vacTravel.IsAllInclusive;
+                cbAllInclusiveTD.IsEnabled = false;
+
+                CheckBox item = new();
+                item.Content = vacTravel.Country;
+                cbxDestinationTD.Items.Add(item);
+                cbxDestinationTD.SelectedIndex = 0;
+                cbxDestinationTD.IsEnabled = false;
+
+
+            }
+
+            else if (travel!.GetType() == typeof(WorkTrip))
+            {
+                //Gör travel till en worktrip så att man kan komma åt extra informationen från den klassen
+                WorkTrip workTravel = (WorkTrip)travel;
+
+                cbAllInclusiveTD.Visibility = Visibility.Hidden;
+                txtQuantityTD.Visibility = Visibility.Hidden;
+                cbRequiredTD.Visibility = Visibility.Hidden;
+
+                txtCityTD.Text = workTravel.DestinationCity;
+                txtCityTD.IsEnabled = false;
+
+                txtPeopleTravelingTD.Text = workTravel.Travelers.ToString();
+                txtPeopleTravelingTD.IsEnabled = false;
+
+                txtMeetingDetailsTD.Text = workTravel.MeetingDetails;
+                txtMeetingDetailsTD.IsEnabled = false;
+
+
+                CheckBox item = new();
+                item.Content = workTravel.Country;
+                cbxDestinationTD.Items.Add(item);
+                cbxDestinationTD.SelectedIndex = 0;
+                cbxDestinationTD.IsEnabled = false;
+            }
 
 
 
 
-
-            txtCityTD.Text = travel.DestinationCity;
-            txtCityTD.IsEnabled = false;
-            txtPeopleTravelingTD.Text = travel.Travelers.ToString();
-            txtPeopleTravelingTD.IsEnabled = false;
-
-            List<Travel> travel2 = tManager.Travels;
-
-
-
-            txtMeetingDetailsTD.Text = travel.
-
-
-            CheckBox item = new();
-            item.Content = travel.Country;
-            cbxDestinationTD.Items.Add(item);
-            cbxDestinationTD.SelectedIndex = 0;
-            cbxDestinationTD.IsEnabled = false;
 
 
 
         }
 
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

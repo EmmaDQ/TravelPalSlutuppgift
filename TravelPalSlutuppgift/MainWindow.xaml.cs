@@ -32,15 +32,19 @@ namespace TravelPalSlutuppgift
             string username = txtUserName.Text.Trim();
             string password = txtPassword.Text.Trim();
             string passwordAgain = txtPasswordAgain.Text.Trim();
+            Countrys country = (Countrys)cbxChooseCountryMain.SelectedItem;
 
 
-            UserManager manager = new();
+            //UserManager signInUser = (UserManager)UserManager.SignInUser(username, password);
+            //UserManager registerUser = (UserManager)UserManager.RegisterUser(username, password, passwordAgain, country);
+
 
 
             //Vill logga in
             if (cbNoAccount.IsChecked == false)
             {
-                bool isUser = manager.SignInUser(username, password);
+
+                bool isUser = UserManager.SignInUser(username, password);
 
                 if (isUser)
                 {
@@ -51,12 +55,10 @@ namespace TravelPalSlutuppgift
 
             else
             {
-                Countrys country = (Countrys)cbxChooseCountryMain.SelectedItem;
-
 
                 if (cbxChooseCountryMain.SelectedIndex != 0)
                 {
-                    bool isRegisterd = manager.RegisterUser(username, password, passwordAgain, country);
+                    bool isRegisterd = UserManager.RegisterUser(username, password, passwordAgain, country);
 
 
                     if (isRegisterd)

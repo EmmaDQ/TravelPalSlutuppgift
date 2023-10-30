@@ -9,11 +9,7 @@ namespace TravelPalSlutuppgift
     /// </summary>
     public partial class TravelsWindow : Window
     {
-        TravelManager tManager = new TravelManager();
-        UserManager uManager = new UserManager();
-
-        private Travel _travel;
-
+        IUser umSignedIn = (IUser)UserManager.SignedInUser;
 
         public TravelsWindow(IUser user)
         {
@@ -21,12 +17,22 @@ namespace TravelPalSlutuppgift
             InitializeComponent();
 
 
-            //Får inte SignedInUser att fungera, vill inte uppdatera från null.. Löste texten på detta sättet istället genom att skicka info genom konstruktorn
-            //lblTitleTravelWin.Content = $"Welcome {uManager.SignedInUser.UserName}";
+
+            //Hur kommer jag åt usernamnet i propertyn.... Löste texten på detta sättet istället genom att skicka info genom konstruktorn
+            lblTitleTravelWin.Content = $"Welcome {umSignedIn.UserName} from {umSignedIn.Location}";
 
 
             lblTitleTravelWin.Content = $"Welcome {user.UserName} from {user.Location}";
 
+            if (user!.GetType() != typeof(User))
+            {
+
+            }
+
+            else if (user!.GetType() != typeof(Admin))
+            {
+
+            }
 
             UpdateUI();
 
@@ -83,9 +89,9 @@ namespace TravelPalSlutuppgift
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
 
-            UserManager manager = new UserManager();
-
             //Vill logga ut och reset SigedInUSer till null
+
+            umSignedIn = null;
 
             Close();
         }
@@ -102,8 +108,9 @@ namespace TravelPalSlutuppgift
                 lstTravelInfo.Items.Remove(travel);
 
 
-                List<Travel> travel2 = tManager.Travels;
-                travel2.Remove(travel);
+                List<Travel> travelsList = (List<Travel>)TravelManager.Travels;
+
+                travelsList.Remove(travel);
 
 
                 UpdateUI();
@@ -141,7 +148,7 @@ namespace TravelPalSlutuppgift
         {
             lstTravelInfo.Items.Clear();
 
-            List<Travel> travel = tManager.Travels;
+            List<Travel> travel = (List<Travel>)TravelManager.Travels;
 
             foreach (Travel travels in travel)
             {

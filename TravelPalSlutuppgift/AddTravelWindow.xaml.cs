@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TravelPalSlutuppgift
 {
@@ -22,6 +11,33 @@ namespace TravelPalSlutuppgift
         public AddTravelWindow()
         {
             InitializeComponent();
+
+            CheckBox countryBox = new CheckBox();
+
+
+            foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
+            {
+                countryBox.Content = country;
+                cbxDestinationAT.Items.Add(country);
+
+            }
+
+
+
+
+
+
+            lblMeetingDetailsAT.Visibility = Visibility.Hidden;
+            txtMeetingDetailsAT.Visibility = Visibility.Hidden;
+            txtQuantityAT.Visibility = Visibility.Hidden;
+            cbRequiredAT.Visibility = Visibility.Hidden;
+            cbAllInclusiveAT.Visibility = Visibility.Hidden;
+            txtQuantityAT.Visibility = Visibility.Hidden;
+            cbRequiredAT.Visibility = Visibility.Hidden;
+
+
+
+
         }
     }
 }

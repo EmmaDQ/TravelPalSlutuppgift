@@ -14,7 +14,7 @@ namespace TravelPalSlutuppgift
         public int TravelDays { get; set; }
 
 
-        public Travel(string destination, Countrys country, int travelers)
+        public Travel(string destination, Countrys country, int travelers, IUser user)
         {
             DestinationCity = destination;
             Country = country;

@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace TravelPalSlutuppgift
 {
-    internal class UserManager
+    internal static class UserManager
     {
         public static List<IUser> Users { get; set; } = new()
 
@@ -14,10 +14,10 @@ namespace TravelPalSlutuppgift
 
         };
 
-        public IUser? SignedInUser { get; set; }
+        public static IUser? SignedInUser { get; set; }
 
 
-        public bool AddingUser(IUser user)
+        public static bool AddingUser(IUser user)
         {
 
             Users.Add(user);
@@ -26,13 +26,13 @@ namespace TravelPalSlutuppgift
         }
 
 
-        public void RemoveUser(IUser user)
+        public static void RemoveUser(IUser user)
         {
             Users.Remove(user);
         }
 
 
-        public bool UppdateUserName(IUser user, string newUser)
+        public static bool UppdateUserName(IUser user, string newUser)
         {
             bool isTaken = UserName(newUser.Trim());
 
@@ -47,7 +47,7 @@ namespace TravelPalSlutuppgift
         }
 
 
-        private bool UserName(string? username)
+        private static bool UserName(string? username)
         {
 
             if (!string.IsNullOrWhiteSpace(username))
@@ -65,7 +65,7 @@ namespace TravelPalSlutuppgift
         }
 
 
-        public bool SignInUser(string username, string password)
+        public static bool SignInUser(string username, string password)
         {
             bool isUser = UserName(username);
             //Går igenom listan och kollar om det finns en match i username och lösenord
@@ -107,7 +107,7 @@ namespace TravelPalSlutuppgift
         }
 
 
-        public bool RegisterUser(string username, string password, string passwordAgain, Countrys country)
+        public static bool RegisterUser(string username, string password, string passwordAgain, Countrys country)
         {
             if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(passwordAgain) && !string.IsNullOrEmpty(username))
             {
@@ -115,35 +115,33 @@ namespace TravelPalSlutuppgift
 
                 if (password == passwordAgain)
                 {
-                    foreach (IUser user in Users)
+
+                    if (!UserName(username))
                     {
-                        if (username != user.UserName)
-                        {
-                            IUser newUser = new User(username, password, country);
+                        IUser newUser = new User(username, password, country);
 
 
-                            AddingUser(newUser);
+                        AddingUser(newUser);
 
-                            //Registrerar inte värdet av newUser..
-                            SignedInUser = newUser;
+                        SignedInUser = newUser;
 
-                            TravelsWindow travelsWindow = new TravelsWindow(newUser);
-                            travelsWindow.Show();
+                        TravelsWindow travelsWindow = new TravelsWindow(newUser);
+                        travelsWindow.Show();
 
 
-                            return true;
-
-                        }
-
-                        else
-                        {
-                            MessageBox.Show("Username already taken, please try again!", "Error username taken");
-
-                            return false;
-                        }
-
+                        return true;
 
                     }
+
+                    else
+                    {
+                        MessageBox.Show("Username already taken, please try again!", "Error username taken");
+
+                        return false;
+                    }
+
+
+
 
 
                 }
