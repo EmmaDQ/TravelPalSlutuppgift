@@ -12,6 +12,7 @@ namespace TravelPalSlutuppgift
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
+        public IUser User { get; set; }
 
 
         public Travel(string destination, Countrys country, int travelers, IUser user)
@@ -19,7 +20,7 @@ namespace TravelPalSlutuppgift
             DestinationCity = destination;
             Country = country;
             Travelers = travelers;
-
+            User = user;
         }
 
 

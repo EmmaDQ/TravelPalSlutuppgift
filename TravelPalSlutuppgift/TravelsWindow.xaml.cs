@@ -22,7 +22,7 @@ namespace TravelPalSlutuppgift
             lblTitleTravelWin.Content = $"Welcome {umSignedIn.UserName} from {umSignedIn.Location}";
 
 
-            lblTitleTravelWin.Content = $"Welcome {user.UserName} from {user.Location}";
+            //lblTitleTravelWin.Content = $"Welcome {user.UserName} from {user.Location}";
 
             if (user!.GetType() != typeof(User))
             {
@@ -126,6 +126,7 @@ namespace TravelPalSlutuppgift
 
             if (selectedItem != null)
             {
+
                 Travel travel = (Travel)selectedItem.Tag;
 
                 TravelDetailsWindow trvlDetailsWin = new TravelDetailsWindow(travel);
@@ -148,17 +149,44 @@ namespace TravelPalSlutuppgift
         {
             lstTravelInfo.Items.Clear();
 
-            List<Travel> travel = (List<Travel>)TravelManager.Travels;
+            List<Travel> travels = TravelManager.Travels;
+            List<IUser> users = UserManager.Users;
 
-            foreach (Travel travels in travel)
+
+            if (umSignedIn.GetType() == typeof(Admin))
             {
-                ListBoxItem item = new();
+                foreach (Travel travel in travels)
+                {
+                    ListBoxItem item = new();
+                    item.Tag = travel;
+                    item.Content = $"{travel.User.UserName}, {travel.Country}";
 
-                item.Tag = travels;
-                item.Content = travels.Country;
-
-                lstTravelInfo.Items.Add(item);
+                    lstTravelInfo.Items.Add(item);
+                }
             }
+
+
+            else
+            {
+                foreach (Travel travel in travels)
+                {
+                    if (travel.User.UserName == umSignedIn.UserName)
+                    {
+                        ListBoxItem item = new();
+                        item.Tag = travel;
+                        item.Content = travel.Country;
+
+                        lstTravelInfo.Items.Add(item);
+
+                    }
+
+                }
+
+
+
+            }
+
+
         }
     }
 }
