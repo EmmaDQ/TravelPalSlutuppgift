@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPalSlutuppgift"
         mc:Ignorable="d"
-        Title="AddTravelWindow" Height="750" Width="800">
+        Title="AddTravelWindow" Height="850" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -154,7 +154,7 @@
            Grid.Column="2"
            Margin="10" 
            FontFamily="Yu Mincho" 
-           FontSize="24" 
+           FontSize="18" 
            />
 
         <ComboBox x:Name="cbxPurposeAT" Grid.Row="7"

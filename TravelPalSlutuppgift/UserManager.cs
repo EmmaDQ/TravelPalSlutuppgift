@@ -101,9 +101,6 @@ namespace TravelPalSlutuppgift
                 return false;
             }
 
-
-            return false;
-
         }
 
 

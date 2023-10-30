@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace TravelPalSlutuppgift
@@ -8,23 +9,41 @@ namespace TravelPalSlutuppgift
     /// </summary>
     public partial class AddTravelWindow : Window
     {
+        private List<string> fill = new()
+        {
+            "Choose the purpose of your trip!",
+            "Worktrip",
+            "Vacation"
+        };
+
         public AddTravelWindow()
         {
             InitializeComponent();
 
-            CheckBox countryBox = new CheckBox();
+            ComboBox countryBox = new ComboBox();
+            countryBox = (ComboBox)cbxDestinationAT;
 
 
             foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
             {
-                countryBox.Content = country;
+                countryBox.Tag = country;
+                countryBox.Text = country.ToString();
+
                 cbxDestinationAT.Items.Add(country);
 
             }
 
+            countryBox.SelectedIndex = 0;
 
 
+            ComboBox purpose = new ComboBox();
+            purpose = (ComboBox)cbxPurposeAT;
+            foreach (string filler in fill)
+            {
+                cbxPurposeAT.Items.Add(filler);
+            }
 
+            purpose.SelectedIndex = 0;
 
 
             lblMeetingDetailsAT.Visibility = Visibility.Hidden;

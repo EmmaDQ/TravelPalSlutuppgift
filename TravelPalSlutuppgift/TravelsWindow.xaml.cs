@@ -9,7 +9,7 @@ namespace TravelPalSlutuppgift
     /// </summary>
     public partial class TravelsWindow : Window
     {
-        IUser umSignedIn = (IUser)UserManager.SignedInUser;
+        IUser? umSignedIn = (IUser?)UserManager.SignedInUser;
 
         public TravelsWindow(IUser user)
         {
@@ -19,20 +19,10 @@ namespace TravelPalSlutuppgift
 
 
             //Hur kommer jag åt usernamnet i propertyn.... Löste texten på detta sättet istället genom att skicka info genom konstruktorn
-            lblTitleTravelWin.Content = $"Welcome {umSignedIn.UserName} from {umSignedIn.Location}";
+            lblTitleTravelWin.Content = $"Welcome {umSignedIn?.UserName} from {umSignedIn?.Location}";
 
 
             //lblTitleTravelWin.Content = $"Welcome {user.UserName} from {user.Location}";
-
-            if (user!.GetType() != typeof(User))
-            {
-
-            }
-
-            else if (user!.GetType() != typeof(Admin))
-            {
-
-            }
 
             UpdateUI();
 
@@ -150,10 +140,9 @@ namespace TravelPalSlutuppgift
             lstTravelInfo.Items.Clear();
 
             List<Travel> travels = TravelManager.Travels;
-            List<IUser> users = UserManager.Users;
 
 
-            if (umSignedIn.GetType() == typeof(Admin))
+            if (umSignedIn?.GetType() == typeof(Admin))
             {
                 foreach (Travel travel in travels)
                 {
@@ -170,7 +159,7 @@ namespace TravelPalSlutuppgift
             {
                 foreach (Travel travel in travels)
                 {
-                    if (travel.User.UserName == umSignedIn.UserName)
+                    if (travel.User.UserName == umSignedIn?.UserName)
                     {
                         ListBoxItem item = new();
                         item.Tag = travel;
