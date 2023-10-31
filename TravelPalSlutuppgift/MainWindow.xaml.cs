@@ -35,14 +35,14 @@ namespace TravelPalSlutuppgift
             Countrys country = (Countrys)cbxChooseCountryMain.SelectedItem;
 
 
-            //UserManager signInUser = (UserManager)UserManager.SignInUser(username, password);
-            //UserManager registerUser = (UserManager)UserManager.RegisterUser(username, password, passwordAgain, country);
-
 
 
             //Vill logga in
             if (cbNoAccount.IsChecked == false)
             {
+                lblPasswordAgain.Visibility = Visibility.Hidden;
+                txtPasswordAgain.Visibility = Visibility.Hidden;
+                cbxChooseCountryMain.Visibility = Visibility.Hidden;
 
                 bool isUser = UserManager.SignInUser(username, password);
 
@@ -52,6 +52,7 @@ namespace TravelPalSlutuppgift
                 }
 
             }
+
 
             else
             {
@@ -74,15 +75,6 @@ namespace TravelPalSlutuppgift
                 }
 
 
-                //Checkbox är ibockad och användaren vill registrera sig
-                //Lägg till användare i listan av users
-
-
-
-
-                /*{
-                    MessageBox.Show("Username and or password is allready taken");
-                }*/
             }
 
 
@@ -94,27 +86,31 @@ namespace TravelPalSlutuppgift
         private void cbNoAccount_Checked(object sender, RoutedEventArgs e)
         {
 
+            lblHeader.Content = "Register";
+            btnLogOrRegister.Content = "Sign up";
+            lblUserName.Content = "Choose a username";
+            lblPassword.Content = "Choose a password";
 
-            if (cbNoAccount.IsChecked == true)
-            {
-                lblHeader.Content = "Register";
-                btnLogOrRegister.Content = "Sign up";
-                lblUserName.Content = "Choose a username";
-                lblPassword.Content = "Choose a password";
-
-                lblPasswordAgain.Visibility = Visibility;
-                txtPasswordAgain.Visibility = Visibility;
-                cbxChooseCountryMain.Visibility = Visibility;
-            }
+            lblPasswordAgain.Visibility = Visibility;
+            txtPasswordAgain.Visibility = Visibility;
+            cbxChooseCountryMain.Visibility = Visibility;
 
 
-            //Ändras inte tillbaka när man checkar av boxen igen.. Kolla in detta sen!!
-            else
-            {
-                lblHeader.Content = "Log in";
-                btnLogOrRegister.Content = "Sign in";
-            }
+        }
 
+        private void cbNoAccount_UnChecked(object sender, RoutedEventArgs e)
+        {
+            lblHeader.Content = "Log in";
+            btnLogOrRegister.Content = "Sign in";
+
+            lblPasswordAgain.Visibility = Visibility.Hidden;
+            txtPasswordAgain.Visibility = Visibility.Hidden;
+            cbxChooseCountryMain.Visibility = Visibility.Hidden;
+
+        }
+
+        private void cb(object sender, RoutedEventArgs e)
+        {
 
         }
     }

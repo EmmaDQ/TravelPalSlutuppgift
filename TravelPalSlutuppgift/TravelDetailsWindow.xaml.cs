@@ -9,6 +9,7 @@ namespace TravelPalSlutuppgift
     public partial class TravelDetailsWindow : Window
     {
         //TravelManager tManager = new();
+
         public TravelDetailsWindow(Travel travel)
         {
             InitializeComponent();
@@ -78,6 +79,15 @@ namespace TravelPalSlutuppgift
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            TravelsWindow tWin = new TravelsWindow(UserManager.SignedInUser);
+
+            tWin.Show();
+
+            Close();
         }
     }
 }
