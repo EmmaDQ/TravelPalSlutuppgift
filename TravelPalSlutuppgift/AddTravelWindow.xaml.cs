@@ -10,7 +10,7 @@ namespace TravelPalSlutuppgift
     /// </summary>
     public partial class AddTravelWindow : Window
     {
-        private List<string> fill = new()
+        public List<string> fill = new()
         {
             "Choose the purpose of your trip!",
             "Worktrip",

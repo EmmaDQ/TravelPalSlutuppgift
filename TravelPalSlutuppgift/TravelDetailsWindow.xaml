@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPalSlutuppgift"
         mc:Ignorable="d"
-        Title="TravelDetailsWindow" Height="850" Width="800">
+        Title="TravelDetailsWindow" Height="750" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -36,7 +36,7 @@
 Grid.Column="1"
 Grid.ColumnSpan="3"
 Content="Travel details" 
-FontSize="48" 
+FontSize="38" 
 FontFamily="Arial" 
 VerticalContentAlignment="Center"
 />
@@ -45,7 +45,7 @@ Grid.Column="1"
 Content="City" 
 HorizontalContentAlignment="Right" 
 VerticalContentAlignment="Center" 
-FontSize="24" 
+FontSize="18" 
 BorderThickness="0,0,20,0" 
 FontFamily="Yu Mincho"/>
 
@@ -54,7 +54,7 @@ Grid.Column="1"
 Content="Destination" 
 HorizontalContentAlignment="Right" 
 VerticalContentAlignment="Center" 
-FontSize="24" 
+FontSize="18" 
 BorderThickness="0,0,20,0" 
 FontFamily="Yu Mincho"/>
 
@@ -63,7 +63,7 @@ Grid.Column="1"
 Content="People traveling" 
 HorizontalContentAlignment="Right" 
 VerticalContentAlignment="Center" 
-FontSize="24" 
+FontSize="18" 
 BorderThickness="0,0,20,0" 
 FontFamily="Yu Mincho" />
 
@@ -72,7 +72,7 @@ Grid.Column="1"
 Content="Start date" 
 HorizontalContentAlignment="Right" 
 VerticalContentAlignment="Bottom" 
-FontSize="24" 
+FontSize="18" 
 BorderThickness="0,0,20,0" 
 FontFamily="Yu Mincho"/>
 
@@ -81,7 +81,7 @@ Grid.Column="1"
 Content="End date" 
 HorizontalContentAlignment="Right" 
 VerticalContentAlignment="Bottom" 
-FontSize="24" 
+FontSize="18" 
 BorderThickness="0,0,20,0" 
 FontFamily="Yu Mincho"/>
 
@@ -91,7 +91,7 @@ FontFamily="Yu Mincho"/>
  Content="Meeting details" 
  HorizontalContentAlignment="Right" 
  VerticalContentAlignment="Center" 
- FontSize="24" 
+ FontSize="18" 
  BorderThickness="0,0,20,0" 
 FontFamily="Yu Mincho"/>
 
@@ -100,7 +100,7 @@ FontFamily="Yu Mincho"/>
  Content="Travel item" 
  HorizontalContentAlignment="Right" 
  VerticalContentAlignment="Center" 
- FontSize="24" 
+ FontSize="18" 
  BorderThickness="0,0,20,0" 
  FontFamily="Yu Mincho"/>
 
@@ -110,13 +110,13 @@ FontFamily="Yu Mincho"/>
  Content="Quantity" 
  HorizontalContentAlignment="Right" 
  VerticalContentAlignment="Center" 
- FontSize="24" 
+ FontSize="18" 
  BorderThickness="0,0,20,0" 
  FontFamily="Yu Mincho"/>
 
         <TextBox x:Name="txtCityTD" Grid.Row="2"
   Grid.Column="2"
-  Margin="10,10,10,10" 
+  Margin="2" 
   FontFamily="Yu Mincho Light" 
   FontSize="18" 
   TextWrapping="Wrap"/>
@@ -124,51 +124,51 @@ FontFamily="Yu Mincho"/>
         <TextBox x:Name="txtPeopleTravelingTD"
   Grid.Row="4"
   Grid.Column="2"
-  Margin="10,10,150,10" 
+  Margin="2,2,150,2" 
   FontFamily="Yu Mincho Light" 
   FontSize="18" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtMeetingDetailsTD" Grid.Row="8"
   Grid.Column="2"
-  Margin="10,10,10,10" 
+  Margin="2" 
   FontFamily="Yu Mincho Light" 
-  FontSize="20" 
+  FontSize="12" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtTravelItemTD" Grid.Row="9"
   Grid.Column="2"
-  Margin="10,10,10,10" 
+  Margin="2" 
   FontFamily="Yu Mincho Light" 
   FontSize="18" 
   TextWrapping="Wrap"/>
 
         <TextBox x:Name="txtQuantityTD" Grid.Row="12"
   Grid.Column="2"
-  Margin="10,10,150,10" 
+  Margin="2,2,150,2" 
   FontFamily="Yu Mincho Light" 
-  FontSize="18" 
+  FontSize="14" 
   TextWrapping="Wrap"/>
 
         <ComboBox x:Name="cbxDestinationTD" Grid.Row="3"
    Grid.Column="2"
-   Margin="10" 
+   Margin="2" 
    FontFamily="Yu Mincho" 
    FontSize="14" 
    />
 
         <ComboBox x:Name="cbxPurposeTD" Grid.Row="7"
    Grid.Column="2"
-   Margin="10" 
+   Margin="2" 
    FontFamily="Yu Mincho" 
-   FontSize="24"
+   FontSize="14"
    />
 
         <CheckBox x:Name="cbAllInclusiveTD" Grid.Row="8"
    Grid.Column="2"
    Content="All inclusive" 
    VerticalAlignment="Center" 
-   FontSize="24" 
+   FontSize="18" 
    Margin="70,0,281,0" 
    FontFamily="Yu Mincho" Grid.ColumnSpan="2"/>
 
@@ -176,7 +176,7 @@ FontFamily="Yu Mincho"/>
    Grid.Column="2"
    Content="Travel document" 
    VerticalAlignment="Center" 
-   FontSize="24" 
+   FontSize="18" 
    Margin="70,0,281,0" 
    FontFamily="Yu Mincho" Grid.ColumnSpan="2"/>
 
@@ -184,7 +184,7 @@ FontFamily="Yu Mincho"/>
    Grid.Column="2"
    Content="Required" 
    VerticalAlignment="Center" 
-   FontSize="24" 
+   FontSize="18" 
    Margin="70,0,281,0" 
    FontFamily="Yu Mincho" Grid.ColumnSpan="2"/>
 
@@ -192,7 +192,7 @@ FontFamily="Yu Mincho"/>
   Grid.Column="3"
   Grid.RowSpan="6"
   Margin="10,10,10,10"
-  FontSize="24"
+  FontSize="14"
   FontFamily="Yu Mincho Light"
   HorizontalContentAlignment="Left"
   />
@@ -212,7 +212,7 @@ Grid.Column="1" Margin="0,0,0,45" Grid.RowSpan="2"
         <Button x:Name="btnEdit" Grid.Column="3"
                 Grid.Row="8"
                 Content="Edit" 
-                FontSize="22" 
+                FontSize="18" 
                 FontFamily="Yu Mincho"
                 Margin="5" Click="btnEdit_Click"/>
 
@@ -220,7 +220,7 @@ Grid.Column="1" Margin="0,0,0,45" Grid.RowSpan="2"
         <Button x:Name="btnExit" Grid.Column="3"
         Grid.Row="9"
         Content="Back" 
-        FontSize="22" 
+        FontSize="18" 
         FontFamily="Yu Mincho"
         Margin="5" Click="btnExit_Click"/>
 

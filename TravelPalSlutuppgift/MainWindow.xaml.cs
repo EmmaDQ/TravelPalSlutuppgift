@@ -21,7 +21,11 @@ namespace TravelPalSlutuppgift
 
             lblPasswordAgain.Visibility = Visibility.Hidden;
             txtPasswordAgain.Visibility = Visibility.Hidden;
+            pbPasswordAgain.Visibility = Visibility.Hidden;
             cbxChooseCountryMain.Visibility = Visibility.Hidden;
+            txtPassword.Visibility = Visibility.Hidden;
+
+
 
 
 
@@ -30,8 +34,10 @@ namespace TravelPalSlutuppgift
         private void btnLogOrRegister_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUserName.Text.Trim();
-            string password = txtPassword.Text.Trim();
-            string passwordAgain = txtPasswordAgain.Text.Trim();
+            string password = pbPassword.Password;
+            //txtPassword.Text.Trim();
+            string passwordAgain = pbPasswordAgain.Password;
+            //txtPasswordAgain.Text.Trim();
             Countrys country = (Countrys)cbxChooseCountryMain.SelectedItem;
 
 
@@ -42,6 +48,8 @@ namespace TravelPalSlutuppgift
             {
                 lblPasswordAgain.Visibility = Visibility.Hidden;
                 txtPasswordAgain.Visibility = Visibility.Hidden;
+                pbPasswordAgain.Visibility = Visibility.Hidden;
+                txtPassword.Visibility = Visibility.Hidden;
                 cbxChooseCountryMain.Visibility = Visibility.Hidden;
 
                 bool isUser = UserManager.SignInUser(username, password);
@@ -92,7 +100,8 @@ namespace TravelPalSlutuppgift
             lblPassword.Content = "Choose a password";
 
             lblPasswordAgain.Visibility = Visibility;
-            txtPasswordAgain.Visibility = Visibility;
+            //txtPasswordAgain.Visibility = Visibility;
+            pbPasswordAgain.Visibility = Visibility;
             cbxChooseCountryMain.Visibility = Visibility;
 
 
@@ -104,7 +113,8 @@ namespace TravelPalSlutuppgift
             btnLogOrRegister.Content = "Sign in";
 
             lblPasswordAgain.Visibility = Visibility.Hidden;
-            txtPasswordAgain.Visibility = Visibility.Hidden;
+            //txtPasswordAgain.Visibility = Visibility.Hidden;
+            pbPasswordAgain.Visibility = Visibility.Hidden;
             cbxChooseCountryMain.Visibility = Visibility.Hidden;
 
         }

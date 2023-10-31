@@ -79,8 +79,6 @@ namespace TravelPalSlutuppgift
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
 
-            //Vill logga ut och reset SigedInUSer till null
-
             umSignedIn = null;
 
             Close();
@@ -148,7 +146,7 @@ namespace TravelPalSlutuppgift
                 {
                     ListBoxItem item = new();
                     item.Tag = travel;
-                    item.Content = $"{travel.User.UserName}, {travel.Country}";
+                    item.Content = $"{travel.User.UserName}, {travel.Country} - ({travel.DestinationCity})";
 
                     lstTravelInfo.Items.Add(item);
                 }
@@ -163,7 +161,7 @@ namespace TravelPalSlutuppgift
                     {
                         ListBoxItem item = new();
                         item.Tag = travel;
-                        item.Content = travel.Country;
+                        item.Content = $"{travel.Country} - ({travel.DestinationCity})";
 
                         lstTravelInfo.Items.Add(item);
 

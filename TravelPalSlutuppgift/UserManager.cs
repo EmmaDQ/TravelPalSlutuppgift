@@ -8,9 +8,10 @@ namespace TravelPalSlutuppgift
         public static List<IUser> Users { get; set; } = new()
 
         {
-            new Admin("username", "password", Countrys.Sweden),
+            new Admin("admin", "password", Countrys.Sweden),
             new User("kalle88", "hej", Countrys.Canada),
             new User("kawaii", "hej", Countrys.Japan),
+            new User("user", "password", Countrys.Sweden)
 
         };
 

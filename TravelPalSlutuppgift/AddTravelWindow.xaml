@@ -210,19 +210,27 @@
         />
 
         <Button x:Name="btnEdit" Grid.Column="3"
-        Grid.Row="8"
-        Content="Add" 
+        Grid.Row="11"
+        Content="Add travel" 
         FontSize="20" 
         FontFamily="Yu Mincho"
-        Margin="2" Click="btnEdit_Click" 
+        Margin="10 3" Click="btnEdit_Click" 
         />
 
         <Button x:Name="btnExit" Grid.Column="3"
-        Grid.Row="9"
+        Grid.Row="12"
         Content="Back" 
         FontSize="20" 
         FontFamily="Yu Mincho"
-        Margin="5" Click="btnExit_Click"/>
+        Margin="10 3" Click="btnExit_Click"/>
+
+        <Button x:Name="btnAddItem" Grid.Column="3"
+        Grid.Row="10"
+        Content="Add new item" 
+        FontSize="20" 
+        FontFamily="Yu Mincho"
+        Margin="10 3" 
+        Click="btnExit_Click"/>
 
 
     </Grid>

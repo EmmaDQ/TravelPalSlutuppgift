@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace TravelPalSlutuppgift
@@ -8,7 +9,7 @@ namespace TravelPalSlutuppgift
     /// </summary>
     public partial class TravelDetailsWindow : Window
     {
-        //TravelManager tManager = new();
+        AddTravelWindow addTravelWindow = new AddTravelWindow();
 
         public TravelDetailsWindow(Travel travel)
         {
@@ -33,11 +34,32 @@ namespace TravelPalSlutuppgift
                 cbAllInclusiveTD.IsChecked = vacTravel.IsAllInclusive;
                 cbAllInclusiveTD.IsEnabled = false;
 
-                CheckBox item = new();
-                item.Content = vacTravel.Country;
-                cbxDestinationTD.Items.Add(item);
-                cbxDestinationTD.SelectedIndex = 0;
+
+                ComboBox item = new();
+
+                foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
+                {
+                    item.Tag = country;
+                    item.Text = country.ToString();
+                    cbxDestinationTD.Items.Add(item);
+                }
+
+                int num = (int)vacTravel.Country;
+                cbxDestinationTD.SelectedIndex = num;
+
                 cbxDestinationTD.IsEnabled = false;
+
+                List<string> fill2 = addTravelWindow.fill;
+                ComboBox item2 = new();
+
+                foreach (string fill in fill2)
+                {
+                    item2.Text = fill;
+                    cbxPurposeTD.Items.Add(item2);
+                }
+
+                cbxPurposeTD.SelectedIndex = 2;
+
 
 
             }
@@ -60,12 +82,31 @@ namespace TravelPalSlutuppgift
                 txtMeetingDetailsTD.Text = workTravel.MeetingDetails;
                 txtMeetingDetailsTD.IsEnabled = false;
 
+                ComboBox item = new();
 
-                CheckBox item = new();
-                item.Content = workTravel.Country;
-                cbxDestinationTD.Items.Add(item);
-                cbxDestinationTD.SelectedIndex = 0;
+                foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
+                {
+                    item.Tag = country;
+                    item.Text = country.ToString();
+                    cbxDestinationTD.Items.Add(item);
+                }
+
+                int num = (int)workTravel.Country;
+                cbxDestinationTD.SelectedIndex = num;
+
                 cbxDestinationTD.IsEnabled = false;
+
+                List<string> fill2 = addTravelWindow.fill;
+                ComboBox item2 = new();
+
+                foreach (string fill in fill2)
+                {
+                    item2.Text = fill;
+                    cbxPurposeTD.Items.Add(item2);
+                }
+
+                cbxPurposeTD.SelectedIndex = 1;
+
             }
 
 
@@ -78,6 +119,8 @@ namespace TravelPalSlutuppgift
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+
+
 
         }
 
