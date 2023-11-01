@@ -10,9 +10,9 @@ namespace TravelPalSlutuppgift
         public int Travelers { get; set; }
         public static List<PackingListItem> PackingList { get; set; } = new()
         {
-            new PackingList{Name = "Passport", Quantity = 1 },
-            new PackingList{Name = "Toothbrush", Quantity = 1},
-            new PackingList{Name = "Charger", Quantity= 1},
+            new PackingListReq("Passport", true ),
+            new PackingListQuant("Toothbrush", 1),
+            new PackingListQuant("Charger", 1),
         };
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

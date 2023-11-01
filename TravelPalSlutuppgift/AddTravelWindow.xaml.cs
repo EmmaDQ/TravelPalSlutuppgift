@@ -190,22 +190,32 @@ namespace TravelPalSlutuppgift
 
             purpose.SelectedIndex = 0;
 
-            foreach (PackingList packList in Travel.PackingList)
+            foreach (PackingListItem packList in Travel.PackingList)
             {
+
+
+                TextBlock tb = new TextBlock();
+                tb.Text = packList.Name;
+
+
+
                 CheckBox cb2 = new CheckBox();
-                CheckBox cb = new CheckBox();
-                cb.Tag = packList;
-                cb.Content = packList.Name;
-                cb.Name = packList.Name;
+                cb2.Tag = packList;
+                cb2.Content = tb + " Required ";
+                cb2.Name = packList.Name + "Req";
 
-                cb2.Tag = cb;
-                cb2.Content = cb.Name + "Required ";
-                cb2.Name = cb.Name + "Req";
+                ListBoxItem item = new ListBoxItem();
+                item.Tag = cb2;
+                item.Content = cb2;
 
-                lstPackingAT.Items.Add(cb2);
+                lstPackingAT.Items.Add(item);
+
+
+
+
             }
 
-            foreach (PackingList packList in Pack)
+            foreach (PackingListItem packList in Pack)
             {
                 ListBoxItem item = new ListBoxItem();
                 item.Tag = packList;
@@ -237,7 +247,7 @@ namespace TravelPalSlutuppgift
 
             if (choosen.IsChecked == true)
             {
-                PackingList item = (PackingList)lstPackingAT.SelectedItem;
+                PackingListItem item = (PackingListItem)lstPackingAT.SelectedItem;
 
                 Pack.Add(item);
 
@@ -265,7 +275,7 @@ namespace TravelPalSlutuppgift
                     cbRequiredAT.Visibility = Visibility.Visible;
 
                     bool isChecked = true;
-                    PackingList packingList = new PackingList(item, isChecked);
+                    PackingListReq packingList = new PackingListReq(item, isChecked);
 
 
                     Pack.Add(packingList);
