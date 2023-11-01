@@ -215,8 +215,7 @@
           FontSize="18"
           FontFamily="Yu Mincho Light"
           HorizontalContentAlignment="Left" 
-          SelectionChanged="lstPackingAT_SelectionChanged" 
-          SizeChanged="lstPackingAT_Selection"
+          SelectionChanged="lstPackingAT_SelectionChanged"
           />
 
         <ListBox x:Name="lstPackingAddAT" Grid.Row="6"
@@ -236,9 +235,9 @@
            Grid.Column="2"
            Margin="0 0 100 0"/>
 
-       
 
-        <Button x:Name="btnEdit" Grid.Column="3"
+
+        <Button x:Name="btnExit" Grid.Column="3"
         Grid.Row="11"
         Content="Add travel" 
         FontSize="20" 
@@ -246,7 +245,7 @@
         Margin="10 3" Click="btnEdit_Click" 
         />
 
-        <Button x:Name="btnExit" Grid.Column="3"
+        <Button x:Name="btnBack" Grid.Column="3"
         Grid.Row="12"
         Content="Back" 
         FontSize="20" 
@@ -258,8 +257,8 @@
         Content="Add new item" 
         FontSize="20" 
         FontFamily="Yu Mincho"
-        Margin="10 3" 
-        Click="btnExit_Click"/>
+        Margin="10,3,10,0" 
+        Click="btnAddItem_Click" Height="33" VerticalAlignment="Top"/>
 
 
     </Grid>

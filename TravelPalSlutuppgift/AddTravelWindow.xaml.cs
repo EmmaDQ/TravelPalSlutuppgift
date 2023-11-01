@@ -163,14 +163,6 @@ namespace TravelPalSlutuppgift
             return false;
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            TravelsWindow tWin = new TravelsWindow(UserManager.SignedInUser);
-            tWin.Show();
-
-            Close();
-
-        }
 
         private void UpdateUI()
         {
@@ -200,13 +192,17 @@ namespace TravelPalSlutuppgift
 
             foreach (PackingList packList in Travel.PackingList)
             {
-
+                CheckBox cb2 = new CheckBox();
                 CheckBox cb = new CheckBox();
                 cb.Tag = packList;
                 cb.Content = packList.Name;
                 cb.Name = packList.Name;
 
-                lstPackingAT.Items.Add(cb);
+                cb2.Tag = cb;
+                cb2.Content = cb.Name + "Required ";
+                cb2.Name = cb.Name + "Req";
+
+                lstPackingAT.Items.Add(cb2);
             }
 
             foreach (PackingList packList in Pack)
@@ -223,7 +219,8 @@ namespace TravelPalSlutuppgift
             //txtQuantityAT.Visibility = Visibility.Hidden;
             cbRequiredAT.Visibility = Visibility.Hidden;
             cbAllInclusiveAT.Visibility = Visibility.Hidden;
-            cbRequiredAT.Visibility = Visibility.Hidden;
+            txtQuantityAT.Visibility = Visibility.Hidden;
+            lblQuantityAT.Visibility = Visibility.Hidden;
 
             txtCityAT.Text = "";
             txtMeetingDetailsAT.Text = "";
@@ -231,17 +228,8 @@ namespace TravelPalSlutuppgift
             txtQuantityAT.Text = "";
             txtTravelItemAT.Text = "";
 
-
-
-
         }
 
-
-
-        private void lstPackingAT_Selection(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void lstPackingAT_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -253,17 +241,61 @@ namespace TravelPalSlutuppgift
 
                 Pack.Add(item);
 
-
-                lstPackingAT.SelectedItem = null;
-
-                UpdateUI();
-                //item.IsChecked = false;
             }
+
+            lstPackingAT.SelectedItem = null;
+
+            UpdateUI();
         }
 
-        private void lstPackingAT_Selection(object sender, SizeChangedEventArgs e)
+
+        private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
+            string? item = txtTravelItemAT.Text.Trim();
+            int num = int.Parse(txtQuantityAT.Text.Trim());
+
+
+
+            bool isOk = CheckForNull(lblTravelItem.Text, item) && CheckForNumber(lblQuantityAT.Text, num);
+
+            if (isOk)
+            {
+                if (cbTravelDocumentsAT.IsChecked == true)
+                {
+                    cbRequiredAT.Visibility = Visibility.Visible;
+
+                    bool isChecked = true;
+                    PackingList packingList = new PackingList(item, isChecked);
+
+
+                    Pack.Add(packingList);
+                }
+
+                else
+                {
+                    txtQuantityAT.Visibility = Visibility.Visible;
+                    lblQuantityAT.Visibility = Visibility.Visible;
+
+
+
+                }
+
+            }
+
+
+
+
 
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            TravelsWindow tWin = new TravelsWindow(UserManager.SignedInUser);
+            tWin.Show();
+
+            Close();
+        }
+
+
     }
 }
