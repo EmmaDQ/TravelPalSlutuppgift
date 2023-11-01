@@ -8,7 +8,12 @@ namespace TravelPalSlutuppgift
         public string DestinationCity { get; set; }
         public Countrys Country { get; set; }
         public int Travelers { get; set; }
-        public List<PackingListItem> PackingList { get; set; }
+        public static List<PackingListItem> PackingList { get; set; } = new()
+        {
+            new PackingList{Name = "Passport", Quantity = 1 },
+            new PackingList{Name = "Toothbrush", Quantity = 1},
+            new PackingList{Name = "Charger", Quantity= 1},
+        };
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }

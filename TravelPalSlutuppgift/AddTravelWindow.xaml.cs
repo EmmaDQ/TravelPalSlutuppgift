@@ -17,7 +17,13 @@ namespace TravelPalSlutuppgift
             "Vacation"
         };
 
+        public List<PackingListItem> Pack { get; set; } = new()
+        {
+
+        };
+
         ComboBox countryBox = new ComboBox();
+        int count = 1;
 
         public AddTravelWindow()
         {
@@ -192,6 +198,25 @@ namespace TravelPalSlutuppgift
 
             purpose.SelectedIndex = 0;
 
+            foreach (PackingList packList in Travel.PackingList)
+            {
+
+                CheckBox cb = new CheckBox();
+                cb.Tag = packList;
+                cb.Content = packList.Name;
+                cb.Name = packList.Name;
+
+                lstPackingAT.Items.Add(cb);
+            }
+
+            foreach (PackingList packList in Pack)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Tag = packList;
+                item.Content = packList.Name;
+                lstPackingAddAT.Items.Add(item);
+            }
+
 
             lblMeetingDetailsAT.Visibility = Visibility.Hidden;
             txtMeetingDetailsAT.Visibility = Visibility.Hidden;
@@ -208,6 +233,27 @@ namespace TravelPalSlutuppgift
 
 
 
+
+        }
+
+        private void lstPackingAT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            CheckBox choosen = (CheckBox)lstPackingAT.SelectedItem;
+
+            if (choosen.IsChecked == true)
+            {
+                ListViewItem item2 = (ListViewItem)lstPackingAT.SelectedItems;
+                PackingList item3 = (PackingList)item2.Tag;
+
+                item2.Tag = choosen;
+                item2.Content = choosen.Name;
+
+                Pack.Add(item3);
+
+                UpdateUI();
+                //item.IsChecked = false;
+            }
 
         }
     }

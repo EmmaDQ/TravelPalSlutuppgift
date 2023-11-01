@@ -35,30 +35,26 @@ namespace TravelPalSlutuppgift
                 cbAllInclusiveTD.IsEnabled = false;
 
 
-                ComboBox item = new();
-
                 foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
                 {
-                    item.Tag = country;
-                    item.Text = country.ToString();
-                    cbxDestinationTD.Items.Add(item);
+                    cbxDestinationTD.Items.Add(country);
                 }
 
+                //cbxDestinationTD.Text = vacTravel.ToString();
                 int num = (int)vacTravel.Country;
                 cbxDestinationTD.SelectedIndex = num;
 
                 cbxDestinationTD.IsEnabled = false;
 
                 List<string> fill2 = addTravelWindow.fill;
-                ComboBox item2 = new();
 
                 foreach (string fill in fill2)
                 {
-                    item2.Text = fill;
-                    cbxPurposeTD.Items.Add(item2);
+                    cbxPurposeTD.Items.Add(fill);
                 }
 
                 cbxPurposeTD.SelectedIndex = 2;
+                cbxPurposeTD.IsEnabled = false;
 
 
 
@@ -106,6 +102,7 @@ namespace TravelPalSlutuppgift
                 }
 
                 cbxPurposeTD.SelectedIndex = 1;
+                cbxPurposeTD.IsEnabled = false;
 
             }
 
