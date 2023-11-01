@@ -211,7 +211,7 @@ namespace TravelPalSlutuppgift
 
             foreach (PackingList packList in Pack)
             {
-                ListViewItem item = new ListViewItem();
+                ListBoxItem item = new ListBoxItem();
                 item.Tag = packList;
                 item.Content = packList.Name;
                 lstPackingAddAT.Items.Add(item);
@@ -236,24 +236,33 @@ namespace TravelPalSlutuppgift
 
         }
 
-        private void lstPackingAT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+
+        private void lstPackingAT_Selection(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void lstPackingAT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
             CheckBox choosen = (CheckBox)lstPackingAT.SelectedItem;
 
             if (choosen.IsChecked == true)
             {
-                ListViewItem item2 = (ListViewItem)lstPackingAT.SelectedItems;
-                PackingList item3 = (PackingList)item2.Tag;
+                PackingList item = (PackingList)lstPackingAT.SelectedItem;
 
-                item2.Tag = choosen;
-                item2.Content = choosen.Name;
+                Pack.Add(item);
 
-                Pack.Add(item3);
+
+                lstPackingAT.SelectedItem = null;
 
                 UpdateUI();
                 //item.IsChecked = false;
             }
+        }
+
+        private void lstPackingAT_Selection(object sender, SizeChangedEventArgs e)
+        {
 
         }
     }
