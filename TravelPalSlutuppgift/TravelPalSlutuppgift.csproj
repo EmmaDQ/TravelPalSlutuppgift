@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="travelpal-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="travelpal-logo.png" />
+  </ItemGroup>
+
 </Project>

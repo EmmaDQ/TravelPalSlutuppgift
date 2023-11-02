@@ -23,7 +23,6 @@ namespace TravelPalSlutuppgift
                 lblMeetingDetailsTD.Visibility = Visibility.Hidden;
                 txtMeetingDetailsTD.Visibility = Visibility.Hidden;
                 txtQuantityTD.Visibility = Visibility.Hidden;
-                cbRequiredTD.Visibility = Visibility.Hidden;
 
                 txtCityTD.Text = vacTravel.DestinationCity;
                 txtCityTD.IsEnabled = false;
@@ -67,7 +66,6 @@ namespace TravelPalSlutuppgift
 
                 cbAllInclusiveTD.Visibility = Visibility.Hidden;
                 txtQuantityTD.Visibility = Visibility.Hidden;
-                cbRequiredTD.Visibility = Visibility.Hidden;
 
                 txtCityTD.Text = workTravel.DestinationCity;
                 txtCityTD.IsEnabled = false;
