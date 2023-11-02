@@ -76,10 +76,10 @@ namespace TravelPalSlutuppgift
                 string? city = txtCityAT.Text.Trim();
                 Countrys country = (Countrys)cbxDestinationAT.SelectedItem;
                 int numPeople = int.Parse(txtPeopleTravelingAT.Text.Trim());
-                string? travelItem = txtTravelItemAT.Text.Trim();
-                int quantity = int.Parse(txtQuantityAT.Text.Trim());
+                //string? travelItem = txtTravelItemAT.Text.Trim();
+                //int quantity = int.Parse(txtQuantityAT.Text.Trim());
 
-                bool isOk = CheckForNull(lblCity.Text, city) && countryBox.SelectedIndex != 0 && CheckForNumber(lblPeopleTrav.Text, numPeople) && CheckForNull(lblTravelItem.Text, travelItem) && CheckForNumber(lblQuantityAT.Text, quantity);
+                bool isOk = CheckForNull(lblCity.Text, city) && countryBox.SelectedIndex != 0 && CheckForNumber(lblPeopleTrav.Text, numPeople);
 
                 if (isOk)
                 {
@@ -91,11 +91,11 @@ namespace TravelPalSlutuppgift
 
                         if (isWorktripMeeting)
                         {
-                            Travel travel = new WorkTrip(city, country, numPeople, meetingDetail, UserManager.SignedInUser);
+                            Travel travel = new WorkTrip(city, country, numPeople, meetingDetail, UserManager.SignedInUser, Pack);
 
                             TravelManager.AddTravel(travel);
 
-
+                            MessageBox.Show($"New worktrip to {city} for {numPeople} successfully added!", "New travel");
                         }
 
                     }
@@ -110,10 +110,11 @@ namespace TravelPalSlutuppgift
                             allInclusive = true;
                         }
 
-                        Travel travel = new Vacation(city, country, numPeople, allInclusive, UserManager.SignedInUser);
+                        Travel travel = new Vacation(city, country, numPeople, allInclusive, UserManager.SignedInUser, Pack);
 
                         TravelManager.AddTravel(travel);
 
+                        MessageBox.Show($"New vacation to {city} for {numPeople} successfully added!", "New travel");
 
                     }
 
@@ -166,6 +167,10 @@ namespace TravelPalSlutuppgift
 
         private void UpdateUI()
         {
+            cbxDestinationAT.Items.Clear();
+            cbxPurposeAT.Items.Clear();
+            lstPackingAddAT.ItemsSource = null;
+
             countryBox = (ComboBox)cbxDestinationAT;
 
 
@@ -181,8 +186,8 @@ namespace TravelPalSlutuppgift
             countryBox.SelectedIndex = 0;
 
 
-            ComboBox purpose = new ComboBox();
-            purpose = (ComboBox)cbxPurposeAT;
+            //ComboBox purpose = new ComboBox();
+            ComboBox purpose = (ComboBox)cbxPurposeAT;
             foreach (string filler in fill)
             {
                 cbxPurposeAT.Items.Add(filler);
@@ -190,38 +195,23 @@ namespace TravelPalSlutuppgift
 
             purpose.SelectedIndex = 0;
 
-            foreach (PackingListItem packList in Travel.PackingList)
+
+
+            /*foreach (PackingListItem packList in Travel.PackingList)
             {
 
-
-                TextBlock tb = new TextBlock();
-                tb.Text = packList.Name;
-
-
-
-                CheckBox cb2 = new CheckBox();
-                cb2.Tag = packList;
-                cb2.Content = tb + " Required ";
-                cb2.Name = packList.Name + "Req";
-
                 ListBoxItem item = new ListBoxItem();
-                item.Tag = cb2;
-                item.Content = cb2;
+                item.Tag = packList;
+                item.Content = packList.Name;
 
                 lstPackingAT.Items.Add(item);
 
 
+                lstPackingAT.ItemsSource = (System.Collections.IEnumerable)packList;
 
 
-            }
+            }*/
 
-            foreach (PackingListItem packList in Pack)
-            {
-                ListBoxItem item = new ListBoxItem();
-                item.Tag = packList;
-                item.Content = packList.Name;
-                lstPackingAddAT.Items.Add(item);
-            }
 
 
             lblMeetingDetailsAT.Visibility = Visibility.Hidden;
@@ -229,8 +219,8 @@ namespace TravelPalSlutuppgift
             //txtQuantityAT.Visibility = Visibility.Hidden;
             cbRequiredAT.Visibility = Visibility.Hidden;
             cbAllInclusiveAT.Visibility = Visibility.Hidden;
-            txtQuantityAT.Visibility = Visibility.Hidden;
-            lblQuantityAT.Visibility = Visibility.Hidden;
+            //txtQuantityAT.Visibility = Visibility.Hidden;
+            //lblQuantityAT.Visibility = Visibility.Hidden;
 
             txtCityAT.Text = "";
             txtMeetingDetailsAT.Text = "";
@@ -241,59 +231,36 @@ namespace TravelPalSlutuppgift
         }
 
 
-        private void lstPackingAT_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CheckBox choosen = (CheckBox)lstPackingAT.SelectedItem;
-
-            if (choosen.IsChecked == true)
-            {
-                PackingListItem item = (PackingListItem)lstPackingAT.SelectedItem;
-
-                Pack.Add(item);
-
-            }
-
-            lstPackingAT.SelectedItem = null;
-
-            UpdateUI();
-        }
-
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
             string? item = txtTravelItemAT.Text.Trim();
-            int num = int.Parse(txtQuantityAT.Text.Trim());
+            lstPackingAddAT.ItemsSource = null;
 
-
-
-            bool isOk = CheckForNull(lblTravelItem.Text, item) && CheckForNumber(lblQuantityAT.Text, num);
-
-            if (isOk)
+            if (CheckForNull(lblTravelItem.Text, item) && cbRequiredAT.IsChecked == true)
             {
-                if (cbTravelDocumentsAT.IsChecked == true)
-                {
-                    cbRequiredAT.Visibility = Visibility.Visible;
 
-                    bool isChecked = true;
-                    PackingListReq packingList = new PackingListReq(item, isChecked);
-
-
-                    Pack.Add(packingList);
-                }
-
-                else
-                {
-                    txtQuantityAT.Visibility = Visibility.Visible;
-                    lblQuantityAT.Visibility = Visibility.Visible;
-
-
-
-                }
-
+                PackingListReq item2 = new PackingListReq(item, true);
+                Pack.Add(item2);
             }
 
+            else
+            {
+                int num = int.Parse(txtQuantityAT.Text.Trim());
+
+                if (CheckForNumber(lblQuantityAT.Text, num))
+                {
+                    PackingListQuant item2 = new PackingListQuant(item, num);
+                    Pack.Add(item2);
+                }
+            }
+
+            lstPackingAddAT.ItemsSource = Pack;
 
 
+            txtTravelItemAT.Text = "";
+            txtQuantityAT.Text = "";
+            cbTravelDocumentsAT.IsChecked = false;
 
 
         }
@@ -307,5 +274,24 @@ namespace TravelPalSlutuppgift
         }
 
 
+        private void cbTravelDocumentsAT_Checked(object sender, RoutedEventArgs e)
+        {
+
+            cbRequiredAT.Visibility = Visibility.Visible;
+
+            txtQuantityAT.Visibility = Visibility.Hidden;
+            lblQuantityAT.Visibility = Visibility.Hidden;
+
+        }
+
+        private void cbTravelDocumentsAT_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+            txtQuantityAT.Visibility = Visibility.Visible;
+            lblQuantityAT.Visibility = Visibility.Visible;
+
+            cbRequiredAT.Visibility = Visibility.Hidden;
+
+        }
     }
 }

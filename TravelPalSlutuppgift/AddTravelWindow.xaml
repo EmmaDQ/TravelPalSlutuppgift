@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TravelPalSlutuppgift"
         mc:Ignorable="d"
         Title="AddTravelWindow" Height="750" Width="800">
-    <Grid>
+    <Grid x:Name="btnAddToItems">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width=" 0.7*"/>
@@ -40,19 +40,10 @@
         VerticalContentAlignment="Center" BorderBrush="{x:Null}" IsEnabled="False"
         />
 
-        <TextBox Grid.Row="1"
-        Grid.Column="3"
-        Grid.ColumnSpan="3"
-        Text ="I need to pack:" 
-        FontSize="18" 
-        FontFamily="Yu Mincho" 
-        VerticalContentAlignment="Bottom" Margin="10,0,0,0" BorderBrush="{x:Null}" IsEnabled="False"
-        />
-
         <TextBox Grid.Row="6"
         Grid.Column="3"
         Grid.ColumnSpan="3"
-        Text ="Added travel items:" 
+        Text ="Items to bring on my trip:" 
         FontSize="18" 
         FontFamily="Yu Mincho" 
         VerticalContentAlignment="Top" 
@@ -198,7 +189,7 @@
            VerticalAlignment="Center" 
            FontSize="14" 
            Margin="70,0,281,0" 
-           FontFamily="Yu Mincho" Grid.ColumnSpan="2"/>
+           FontFamily="Yu Mincho" Grid.ColumnSpan="2" Checked="cbTravelDocumentsAT_Checked" Unchecked="cbTravelDocumentsAT_Unchecked"/>
 
         <CheckBox x:Name="cbRequiredAT" Grid.Row="12"
            Grid.Column="2"
@@ -208,26 +199,36 @@
            Margin="70,0,281,0" 
            FontFamily="Yu Mincho" Grid.ColumnSpan="2"/>
 
-        <ListBox x:Name="lstPackingAT" Grid.Row="2"
-          Grid.Column="3"
-          Grid.RowSpan="4"
-          Margin="10,10,10,20"
-          FontSize="18"
-          FontFamily="Yu Mincho Light"
-          HorizontalContentAlignment="Left" 
-          SelectionChanged="lstPackingAT_SelectionChanged"
-          />
 
         <ListBox x:Name="lstPackingAddAT" Grid.Row="6"
           Grid.Column="3"
-          Grid.RowSpan="1"
+          Grid.RowSpan="4"
           Margin="10,30,10,10"
-          FontSize="18"
+          FontSize="14"
           FontFamily="Yu Mincho Light"
-          HorizontalContentAlignment="Left"
-          />
+          HorizontalContentAlignment="Left">
+                
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" />
+                        <CheckBox Grid.Column="1" Margin="10 0 0 0" Content="Required" FontSize="10">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                        <TextBlock Grid.Column="1" Margin="100 0 0 0" Text="{Binding Quantity}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
 
-        <Calendar x:Name="cdarStartAT" Grid.Row="5"
+            </ListBox>
+
+            <Calendar x:Name="cdarStartAT" Grid.Row="5"
            Grid.Column="2"
            Margin="0 0 100 0"/>
 
@@ -242,7 +243,7 @@
         Content="Add travel" 
         FontSize="20" 
         FontFamily="Yu Mincho"
-        Margin="10 3" Click="btnEdit_Click" 
+        Margin="130 3 10 3" Click="btnEdit_Click" 
         />
 
         <Button x:Name="btnBack" Grid.Column="3"
@@ -250,14 +251,14 @@
         Content="Back" 
         FontSize="20" 
         FontFamily="Yu Mincho"
-        Margin="10 3" Click="btnExit_Click"/>
+        Margin="130 3 10 3" Click="btnExit_Click"/>
 
         <Button x:Name="btnAddItem" Grid.Column="3"
         Grid.Row="10"
         Content="Add new item" 
-        FontSize="20" 
+        FontSize="16" 
         FontFamily="Yu Mincho"
-        Margin="10,3,10,0" 
+        Margin="10,3,160,0" 
         Click="btnAddItem_Click" Height="33" VerticalAlignment="Top"/>
 
 
