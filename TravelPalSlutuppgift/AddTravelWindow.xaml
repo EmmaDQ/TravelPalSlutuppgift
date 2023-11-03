@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPalSlutuppgift"
         mc:Ignorable="d"
-        Title="AddTravelWindow" Height="750" Width="800">
+        Title="AddTravelWindow" Height="750" Width="800" WindowStartupLocation="CenterScreen">
     <Grid x:Name="btnAddToItems">
         <Grid.Background>
             <SolidColorBrush Color="MediumSlateBlue" Opacity="0.1"/>
@@ -276,7 +276,10 @@
         Content="Add travel" 
         FontSize="20" 
         FontFamily="Yu Mincho"
-        Margin="130 3 10 3" Click="btnEdit_Click" Background="#FF604BDF" Foreground="MintCream" 
+        Margin="130 3 10 3" 
+        Click="btnAddTravel_Click" 
+        Background="#FF604BDF" 
+        Foreground="MintCream" 
         />
 
         <Button x:Name="btnBack" Grid.Column="3"

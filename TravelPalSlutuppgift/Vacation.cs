@@ -6,7 +6,7 @@ namespace TravelPalSlutuppgift
     {
         public bool IsAllInclusive { get; set; }
 
-        public Vacation(string destination, Countrys country, int travelers, bool isAllInclusive, IUser user, List<PackingListItem> pack) : base(destination, country, travelers, user)
+        public Vacation(string destination, Countrys country, int travelers, bool isAllInclusive, IUser user, List<PackingListItem> pack) : base(destination, country, travelers, user, pack)
         {
             IsAllInclusive = isAllInclusive;
         }

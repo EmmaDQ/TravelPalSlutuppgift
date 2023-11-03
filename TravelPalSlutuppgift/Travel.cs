@@ -18,12 +18,13 @@ namespace TravelPalSlutuppgift
         public IUser User { get; set; }
 
 
-        public Travel(string destination, Countrys country, int travelers, IUser user)
+        public Travel(string destination, Countrys country, int travelers, IUser user, List<PackingListItem> pack)
         {
             DestinationCity = destination;
             Country = country;
             Travelers = travelers;
             User = user;
+            PackingList = pack;
         }
 
 

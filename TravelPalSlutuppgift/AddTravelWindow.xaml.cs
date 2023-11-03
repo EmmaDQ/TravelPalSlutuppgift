@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,6 +22,9 @@ namespace TravelPalSlutuppgift
         {
 
         };
+
+        List<PackingListItem> pack { get; set; } = new List<PackingListItem>();
+
 
         ComboBox countryBox = new ComboBox();
         int count = 1;
@@ -63,12 +67,19 @@ namespace TravelPalSlutuppgift
             }
         }
 
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
+            Passport();
+            bool ok = false;
+            if (cbxPurposeAT.SelectedIndex != 0)
+            {
+                ok = true;
+            }
 
-            if (cbxPurposeAT.SelectedIndex == 0)
+            else
             {
                 MessageBox.Show("Please choose a purpose for your travel!", "Error");
+
             }
 
             try
@@ -81,13 +92,14 @@ namespace TravelPalSlutuppgift
 
                 bool isOk = CheckForNull(lblCity.Text, city) && countryBox.SelectedIndex != 0 && CheckForNumber(lblPeopleTrav.Text, numPeople);
 
-                if (isOk)
+                if (isOk && ok)
                 {
                     //om det är en worktrip
                     if (cbxPurposeAT.SelectedIndex == 1)
                     {
                         string? meetingDetail = txtMeetingDetailsAT.Text.Trim();
                         bool isWorktripMeeting = CheckForNull(lblMeetingDetailsAT.Text, meetingDetail);
+
 
                         if (isWorktripMeeting)
                         {
@@ -110,6 +122,7 @@ namespace TravelPalSlutuppgift
                             allInclusive = true;
                         }
 
+
                         Travel travel = new Vacation(city, country, numPeople, allInclusive, UserManager.SignedInUser, Pack);
 
                         TravelManager.AddTravel(travel);
@@ -121,9 +134,9 @@ namespace TravelPalSlutuppgift
                     else
                         MessageBox.Show("Something went wrong, please try again", "Error");
 
-                    UpdateUI();
 
                 }
+
 
             }
 
@@ -138,7 +151,66 @@ namespace TravelPalSlutuppgift
             }
 
 
+            UpdateUI();
 
+
+        }
+
+        private void Passport()
+        {
+
+            bool isEu = false;
+            bool isEuTravel = false;
+            bool isNeedingPass = false;
+            Countrys countr = UserManager.SignedInUser.Location;
+            Countrys country = (Countrys)cbxDestinationAT.SelectedItem;
+
+
+            foreach (EuCountrys eu in EuCountrys.GetValues(typeof(EuCountrys)))
+            {
+                if (countr == (Countrys)eu)
+                {
+                    isEu = true;
+                }
+            }
+
+            foreach (EuCountrys eu in EuCountrys.GetValues(typeof(EuCountrys)))
+            {
+                if (country == (Countrys)eu)
+                {
+                    isEuTravel = true;
+                }
+            }
+
+            for (int i = 0; i > Pack.Count; i++)
+            {
+                if (Pack.FirstOrDefault(u => u.Name == "Passport") != null || Pack.FirstOrDefault(u2 => u2.Name == "passport") != null)
+                {
+                    //Pack.Remove(listItem);
+                }
+            }
+
+            if (isEu && !isEuTravel)
+            {
+
+                PackingListReq item2 = new PackingListReq("Passport", true);
+
+                Pack.Add(item2);
+            }
+
+            else if (isEu && isEuTravel)
+            {
+                PackingListReq item2 = new PackingListReq("Passport", false);
+
+                Pack.Add(item2);
+            }
+
+            else if (!isEu)
+            {
+                PackingListReq item2 = new PackingListReq("Passport", true);
+
+                Pack.Add(item2);
+            }
         }
 
         private bool CheckForNull(string box, string input)
@@ -170,6 +242,8 @@ namespace TravelPalSlutuppgift
             cbxDestinationAT.Items.Clear();
             cbxPurposeAT.Items.Clear();
             lstPackingAddAT.ItemsSource = null;
+
+
 
             countryBox = (ComboBox)cbxDestinationAT;
 
@@ -237,12 +311,23 @@ namespace TravelPalSlutuppgift
             string? item = txtTravelItemAT.Text.Trim();
             lstPackingAddAT.ItemsSource = null;
 
-            if (CheckForNull(lblTravelItem.Text, item) && cbRequiredAT.IsChecked == true)
+            if (CheckForNull(lblTravelItem.Text, item) && cbTravelDocumentsAT.IsChecked == true)
             {
+                if (cbRequiredAT.IsChecked == true)
+                {
+                    PackingListReq item2 = new PackingListReq(item, true);
+                    Pack.Add(item2);
+                }
 
-                PackingListReq item2 = new PackingListReq(item, true);
-                Pack.Add(item2);
+                else
+                {
+                    PackingListReq item2 = new PackingListReq(item, false);
+                    Pack.Add(item2);
+                }
+
+
             }
+
 
             else
             {
@@ -253,6 +338,8 @@ namespace TravelPalSlutuppgift
                     PackingListQuant item2 = new PackingListQuant(item, num);
                     Pack.Add(item2);
                 }
+
+
             }
 
             lstPackingAddAT.ItemsSource = Pack;
@@ -261,6 +348,7 @@ namespace TravelPalSlutuppgift
             txtTravelItemAT.Text = "";
             txtQuantityAT.Text = "";
             cbTravelDocumentsAT.IsChecked = false;
+            cbRequiredAT.IsChecked = false;
 
 
         }

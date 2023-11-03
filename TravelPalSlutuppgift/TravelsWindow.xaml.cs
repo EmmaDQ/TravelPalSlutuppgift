@@ -100,6 +100,8 @@ namespace TravelPalSlutuppgift
 
                 travelsList.Remove(travel);
 
+                TravelManager.Travels.Remove(travel);
+
 
                 UpdateUI();
             }

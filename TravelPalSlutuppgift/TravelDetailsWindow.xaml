@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPalSlutuppgift"
         mc:Ignorable="d"
-        Title="TravelDetailsWindow" Height="750" Width="800">
+        Title="TravelDetailsWindow" Height="750" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="MediumSlateBlue" Opacity="0.1"/>
@@ -117,17 +117,13 @@ FontFamily="Yu Mincho"/>
 
         <TextBox x:Name="txtMeetingDetailsTD" Grid.Row="8"
   Grid.Column="2"
+        Grid.RowSpan="3"
   Margin="2" 
   FontFamily="Yu Mincho Light" 
   FontSize="12" 
   TextWrapping="Wrap"/>
 
-        <TextBox x:Name="txtTravelItemTD" Grid.Row="9"
-  Grid.Column="2"
-  Margin="2" 
-  FontFamily="Yu Mincho Light" 
-  FontSize="18" 
-  TextWrapping="Wrap"/>
+       
 
         <TextBox x:Name="txtQuantityTD" Grid.Row="12"
   Grid.Column="2"

@@ -39,11 +39,10 @@ namespace TravelPalSlutuppgift
                     cbxDestinationTD.Items.Add(country);
                 }
 
-                //cbxDestinationTD.Text = vacTravel.ToString();
                 int num = (int)vacTravel.Country;
                 cbxDestinationTD.SelectedIndex = num;
-
                 cbxDestinationTD.IsEnabled = false;
+
 
                 List<string> fill2 = addTravelWindow.fill;
 
@@ -54,6 +53,9 @@ namespace TravelPalSlutuppgift
 
                 cbxPurposeTD.SelectedIndex = 2;
                 cbxPurposeTD.IsEnabled = false;
+
+                lstPackingTD.ItemsSource = travel.PackingList;
+                lstPackingTD.IsEnabled = false;
 
 
 
@@ -102,6 +104,10 @@ namespace TravelPalSlutuppgift
                 cbxPurposeTD.SelectedIndex = 1;
                 cbxPurposeTD.IsEnabled = false;
 
+
+
+                lstPackingTD.ItemsSource = travel.PackingList;
+                lstPackingTD.IsEnabled = false;
             }
 
 
