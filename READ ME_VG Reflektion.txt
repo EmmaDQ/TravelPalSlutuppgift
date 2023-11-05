@@ -1,0 +1,23 @@
+https://github.com/EmmaDQ/TravelPalSlutuppgift.git 
+
+  
+
+Emma Dahlqvist_TravelPal slutuppgift 
+
+  
+
+Jag valde att utesluta "RegisterWindow" och i stället för ett nytt fönster där man kan registrera en ny användare blev det en checkbox i mainWindow. Detta ansåg jag hade bättre funktion och mindre steg för användaren då den inte behöver byta sida. Jag använder ett "isChecked" event och ett "isUnChecked" eventet för att ändra tillgången till informationen för att matcha behovet av valet. 
+
+Jag tolkade uppgiften som att vi behövde ha en checkbox i packlistans information som visades i listboxen och som kunde vara i bockad eller ej. Jag hittade information som berättade om Templates man kan göra för de olika objekten i xaml. Det hjälpte mig att designa en listbox vars items hade en textblock där jag kunde använda "Bind" för att koppla namn-variabeln, en checkbox med kopplad bool för om det var ett "required" resedokument och en textblock till som kopplade antalet användaren hade skrivit in. 
+
+Jag försökte länge med att skapa egna listobjekt som var checkboxar och som hade checkboxar i sig i codebehinden men detta resulterade alltid i att templaten skrevs över, och att inte all information jag ville ha med syntes. 
+Det har fungerat med att fylla listboxen med hjälp av ItemsSource som likaställdes med den lokala packlistan istället för att skapa egna listboxobjekt som vi gjort tidigare. Jag gissar att denna metod inte skapar enskilda objekt i listan som innehåller Tag. Om man skulle vilja ändra i listan, som att kunna ta bort något man selectar, hade det kanske inte gått i listboxen utan det hade nog bara speglat den lokala listan. Nu när uppgiften endast behövde kunna visa packlista så klarade det sig med denna lösning. 
+
+Jag har några extra metoder som jag använder för att göra det lite mer överskådligt och för att slippa mycket upprepning. Dessa är "UpdateUI", "Passport" och "CheckForNull/CheckForNumber(string s, string/int input)". 
+Jag har gjort så att passport uppdateras i packlistan när en ny travel skapas. Detta gör att det blir rätt i travelobjektet när det visas i details men jag har inte gjort så att packlistan i addTravel uppdateras baserat på inputen som användaren sätter. När vi hade presentationerna såg jag att mina klasskamrater hade gjort detta. Det finns för och nackdelar med båda sätten. Deras lösning ger ett pack-item direkt i listvyn vilket gör att användaren antagligen inte skriver till det igen och det var trevligt med en direkt feedback när man valde land. Men om användaren trott det skulle lägga till passport kommer listan att ha två pass-items medans min alltid har ett korrekt ifyllt alternativ. 
+
+Om jag hade gjort om projektet med kunskaperna jag har nu hade jag nog lagt till en uppdatering i listan av mina items så att det korrekta passet hade lagts in även synligt i listboxen i realtid. Få det bästa av de två världarna på samma gång. Jag är nöjd med hur mitt projekt blev i slutändan då det fungerar och jag lyckats hitta lösningar på det som har krånglat. Linq har varit väldigt smidigt och användbart när jag behövt hitta specifika saker i listorna. Jag har greppat funktionen av static i denna uppgift och hur det ska användas.  
+
+ 
+
+ 

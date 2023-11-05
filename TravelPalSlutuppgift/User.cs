@@ -7,9 +7,6 @@
         public Countrys Location { get; set; }
 
 
-        //public List<Travel> travels = new List<Travel>();
-
-
         public User(string username, string password, Countrys country)
         {
             UserName = username;

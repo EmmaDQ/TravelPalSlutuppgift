@@ -11,18 +11,15 @@ namespace TravelPalSlutuppgift
     {
         IUser? umSignedIn = (IUser?)UserManager.SignedInUser;
 
-        public TravelsWindow(IUser user)
+        public TravelsWindow()
         {
 
             InitializeComponent();
 
 
-
-            //Hur kommer jag åt usernamnet i propertyn.... Löste texten på detta sättet istället genom att skicka info genom konstruktorn
             lblTitleTravelWin.Content = $"Welcome {umSignedIn?.UserName} from {umSignedIn?.Location}";
 
 
-            //lblTitleTravelWin.Content = $"Welcome {user.UserName} from {user.Location}";
 
             UpdateUI();
 

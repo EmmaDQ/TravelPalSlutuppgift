@@ -402,7 +402,7 @@ namespace TravelPalSlutuppgift
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            TravelsWindow tWin = new TravelsWindow(UserManager.SignedInUser);
+            TravelsWindow tWin = new TravelsWindow();
             tWin.Show();
 
             Close();

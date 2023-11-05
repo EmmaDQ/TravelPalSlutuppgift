@@ -83,7 +83,7 @@ namespace TravelPalSlutuppgift
                         //
                         SignedInUser = user;    //<------------------
 
-                        TravelsWindow travelwin = new TravelsWindow(user);
+                        TravelsWindow travelwin = new TravelsWindow();
 
                         travelwin.Show();
 
@@ -123,7 +123,7 @@ namespace TravelPalSlutuppgift
 
                         SignedInUser = newUser;
 
-                        TravelsWindow travelsWindow = new TravelsWindow(newUser);
+                        TravelsWindow travelsWindow = new TravelsWindow();
                         travelsWindow.Show();
 
 
