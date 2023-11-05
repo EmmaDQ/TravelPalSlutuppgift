@@ -106,6 +106,8 @@ namespace TravelPalSlutuppgift
                 UpdateUI();
             }
 
+            else MessageBox.Show("Please choose a travel to remove", "No selection");
+
 
 
         }
@@ -126,6 +128,9 @@ namespace TravelPalSlutuppgift
                 Close();
 
             }
+
+
+            else MessageBox.Show("Please choose a travel to get more detailed information", "No selection");
 
 
         }

@@ -18,12 +18,13 @@ namespace TravelPalSlutuppgift
             "Vacation"
         };
 
-        public List<PackingListItem> Pack { get; set; } = new()
+        private static List<PackingListItem> Pack { get; set; } = new()
         {
 
         };
 
-        List<PackingListItem> pack { get; set; } = new List<PackingListItem>();
+        //Dubblett som inte rensas och kopplas inte 
+        private List<PackingListItem> pack = new();
 
 
         ComboBox countryBox = new ComboBox();
@@ -70,17 +71,6 @@ namespace TravelPalSlutuppgift
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             Passport();
-            bool ok = false;
-            if (cbxPurposeAT.SelectedIndex != 0)
-            {
-                ok = true;
-            }
-
-            else
-            {
-                MessageBox.Show("Please choose a purpose for your travel!", "Error");
-
-            }
 
             try
             {
@@ -92,50 +82,104 @@ namespace TravelPalSlutuppgift
 
                 bool isOk = CheckForNull(lblCity.Text, city) && countryBox.SelectedIndex != 0 && CheckForNumber(lblPeopleTrav.Text, numPeople);
 
-                if (isOk && ok)
+                if (isOk)
                 {
-                    //om det är en worktrip
-                    if (cbxPurposeAT.SelectedIndex == 1)
+
+
+                    if (cbxPurposeAT.SelectedIndex > 0)
                     {
-                        string? meetingDetail = txtMeetingDetailsAT.Text.Trim();
-                        bool isWorktripMeeting = CheckForNull(lblMeetingDetailsAT.Text, meetingDetail);
-
-
-                        if (isWorktripMeeting)
+                        //om det är en worktrip
+                        if (cbxPurposeAT.SelectedIndex == 1)
                         {
-                            Travel travel = new WorkTrip(city, country, numPeople, meetingDetail, UserManager.SignedInUser, Pack);
+                            string? meetingDetail = txtMeetingDetailsAT.Text.Trim();
+                            bool isWorktripMeeting = CheckForNull(lblMeetingDetailsAT.Text, meetingDetail);
 
-                            TravelManager.AddTravel(travel);
 
-                            MessageBox.Show($"New worktrip to {city} for {numPeople} successfully added!", "New travel");
+                            if (isWorktripMeeting)
+                            {
+                                if (Pack.Count > 1)
+                                {
+                                    Travel travel = new WorkTrip(city, country, numPeople, meetingDetail, UserManager.SignedInUser, pack);
+
+                                    TravelManager.AddTravel(travel);
+
+                                    MessageBox.Show($"New worktrip to {city} for {numPeople} successfully added!", "New travel");
+
+                                    UpdateUI();
+
+                                    btnAddTravel.IsEnabled = false;
+
+                                }
+
+                                else
+                                {
+                                    MessageBox.Show("You need to bring items on your trip! Please fill in the items and add them to your packinglist", "Empty packinglist");
+                                }
+                            }
+
                         }
 
-                    }
-
-                    //om det är en vacation
-                    else if (cbxPurposeAT.SelectedIndex == 2)
-                    {
-                        bool allInclusive = false;
-
-                        if (cbAllInclusiveAT.IsChecked == true)
+                        //om det är en vacation
+                        else if (cbxPurposeAT.SelectedIndex == 2)
                         {
-                            allInclusive = true;
+                            bool allInclusive = false;
+
+                            if (cbAllInclusiveAT.IsChecked == true)
+                            {
+                                allInclusive = true;
+                            }
+
+                            if (Pack.Count > 1)
+                            {
+                                Travel travel = new Vacation(city, country, numPeople, allInclusive, UserManager.SignedInUser, pack);
+
+                                TravelManager.AddTravel(travel);
+
+                                MessageBox.Show($"New vacation to {city} for {numPeople} successfully added!", "New travel");
+
+                                UpdateUI();
+
+                                btnAddTravel.IsEnabled = false;
+
+
+                            }
+
+                            else
+                            {
+                                MessageBox.Show("You need to bring items on your trip! Please fill in the items and add them to your packinglist", "Empty packinglist");
+                            }
+
+
+
+
                         }
 
+                        else
+                        {
+                            MessageBox.Show("Something went wrong, please try again", "Error");
 
-                        Travel travel = new Vacation(city, country, numPeople, allInclusive, UserManager.SignedInUser, Pack);
-
-                        TravelManager.AddTravel(travel);
-
-                        MessageBox.Show($"New vacation to {city} for {numPeople} successfully added!", "New travel");
+                        }
 
                     }
 
                     else
-                        MessageBox.Show("Something went wrong, please try again", "Error");
+                        MessageBox.Show("Please choose the purpose of your travel", "Selection needed");
+
+
+
+
+
+
+
 
 
                 }
+
+                else
+                    MessageBox.Show("You have to choose a country for your travel", "No country selected");
+
+                //else MessageBox.Show("Something went wrong, please fill in all the textboxes with correct information", "Error");
+
 
 
             }
@@ -151,7 +195,6 @@ namespace TravelPalSlutuppgift
             }
 
 
-            UpdateUI();
 
 
         }
@@ -159,34 +202,40 @@ namespace TravelPalSlutuppgift
         private void Passport()
         {
 
+
             bool isEu = false;
             bool isEuTravel = false;
+
             bool isNeedingPass = false;
             Countrys countr = UserManager.SignedInUser.Location;
             Countrys country = (Countrys)cbxDestinationAT.SelectedItem;
 
-
             foreach (EuCountrys eu in EuCountrys.GetValues(typeof(EuCountrys)))
             {
-                if (countr == (Countrys)eu)
+                if (countr.ToString() == eu.ToString())
                 {
                     isEu = true;
+
                 }
             }
 
             foreach (EuCountrys eu in EuCountrys.GetValues(typeof(EuCountrys)))
             {
-                if (country == (Countrys)eu)
+                if (country.ToString() == eu.ToString())
                 {
                     isEuTravel = true;
                 }
             }
 
-            for (int i = 0; i > Pack.Count; i++)
+            for (int i = 0; i < Pack.Count; i++)
             {
                 if (Pack.FirstOrDefault(u => u.Name == "Passport") != null || Pack.FirstOrDefault(u2 => u2.Name == "passport") != null)
                 {
-                    //Pack.Remove(listItem);
+
+                    Pack.RemoveAll(l => l.Name == "Passport");
+                    Pack.RemoveAll(l => l.Name == "passport");
+                    pack.RemoveAll(l => l.Name == "Passport");
+                    pack.RemoveAll(l => l.Name == "passport");
                 }
             }
 
@@ -196,6 +245,7 @@ namespace TravelPalSlutuppgift
                 PackingListReq item2 = new PackingListReq("Passport", true);
 
                 Pack.Add(item2);
+                pack.Add(item2);
             }
 
             else if (isEu && isEuTravel)
@@ -203,6 +253,8 @@ namespace TravelPalSlutuppgift
                 PackingListReq item2 = new PackingListReq("Passport", false);
 
                 Pack.Add(item2);
+                pack.Add(item2);
+
             }
 
             else if (!isEu)
@@ -210,7 +262,12 @@ namespace TravelPalSlutuppgift
                 PackingListReq item2 = new PackingListReq("Passport", true);
 
                 Pack.Add(item2);
+                pack.Add(item2);
+
             }
+
+
+
         }
 
         private bool CheckForNull(string box, string input)
@@ -242,6 +299,7 @@ namespace TravelPalSlutuppgift
             cbxDestinationAT.Items.Clear();
             cbxPurposeAT.Items.Clear();
             lstPackingAddAT.ItemsSource = null;
+            Pack.Clear();
 
 
 
@@ -260,7 +318,6 @@ namespace TravelPalSlutuppgift
             countryBox.SelectedIndex = 0;
 
 
-            //ComboBox purpose = new ComboBox();
             ComboBox purpose = (ComboBox)cbxPurposeAT;
             foreach (string filler in fill)
             {
@@ -271,20 +328,7 @@ namespace TravelPalSlutuppgift
 
 
 
-            /*foreach (PackingListItem packList in Travel.PackingList)
-            {
 
-                ListBoxItem item = new ListBoxItem();
-                item.Tag = packList;
-                item.Content = packList.Name;
-
-                lstPackingAT.Items.Add(item);
-
-
-                lstPackingAT.ItemsSource = (System.Collections.IEnumerable)packList;
-
-
-            }*/
 
 
 
@@ -317,12 +361,14 @@ namespace TravelPalSlutuppgift
                 {
                     PackingListReq item2 = new PackingListReq(item, true);
                     Pack.Add(item2);
+                    pack.Add(item2);
                 }
 
                 else
                 {
                     PackingListReq item2 = new PackingListReq(item, false);
                     Pack.Add(item2);
+                    pack.Add(item2);
                 }
 
 
@@ -337,6 +383,7 @@ namespace TravelPalSlutuppgift
                 {
                     PackingListQuant item2 = new PackingListQuant(item, num);
                     Pack.Add(item2);
+                    pack.Add(item2);
                 }
 
 

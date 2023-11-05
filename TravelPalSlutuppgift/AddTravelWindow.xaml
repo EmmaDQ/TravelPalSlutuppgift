@@ -254,7 +254,7 @@
                                 <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
                             </CheckBox.LayoutTransform>
                         </CheckBox>
-                        <TextBlock Grid.Column="1" Margin="70 0 0 0" Text="{Binding Quantity}"/>
+                        <TextBlock Grid.Column="1" Margin="70 0 0 0" Text="{Binding Quantity }"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -271,7 +271,7 @@
 
 
 
-        <Button x:Name="btnExit" Grid.Column="3"
+        <Button x:Name="btnAddTravel" Grid.Column="3"
         Grid.Row="11"
         Content="Add travel" 
         FontSize="20" 

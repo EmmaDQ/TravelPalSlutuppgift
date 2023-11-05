@@ -8,10 +8,7 @@ namespace TravelPalSlutuppgift
         public string DestinationCity { get; set; }
         public Countrys Country { get; set; }
         public int Travelers { get; set; }
-        public List<PackingListItem> PackingList { get; set; } = new()
-        {
-
-        };
+        public List<PackingListItem> PackingList { get; set; } = new();
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
@@ -28,9 +25,12 @@ namespace TravelPalSlutuppgift
         }
 
 
-        public virtual string GetInfo()
+        public virtual string? GetInfo()
         {
-            return "";
+
+            return PackingList.ToString();
+
+
         }
 
         private int CalculateTravelDays()
