@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace TravelPalSlutuppgift
 {
@@ -11,9 +10,12 @@ namespace TravelPalSlutuppgift
     {
         AddTravelWindow addTravelWindow = new AddTravelWindow();
 
+
         public TravelDetailsWindow(Travel travel)
         {
             InitializeComponent();
+            cbxDestinationTD.Items.Clear();
+            cbxPurposeTD.Items.Clear();
 
 
             if (travel.GetType() == typeof(Vacation))
@@ -23,7 +25,6 @@ namespace TravelPalSlutuppgift
                 lblMeetingDetailsTD.Visibility = Visibility.Hidden;
                 txtMeetingDetailsTD.Visibility = Visibility.Hidden;
                 txtQuantityTD.Visibility = Visibility.Hidden;
-                cbRequiredTD.Visibility = Visibility.Hidden;
 
                 txtCityTD.Text = vacTravel.DestinationCity;
                 txtCityTD.IsEnabled = false;
@@ -35,30 +36,30 @@ namespace TravelPalSlutuppgift
                 cbAllInclusiveTD.IsEnabled = false;
 
 
-                ComboBox item = new();
-
                 foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
                 {
-                    item.Tag = country;
-                    item.Text = country.ToString();
-                    cbxDestinationTD.Items.Add(item);
+                    cbxDestinationTD.Items.Add(country);
                 }
 
                 int num = (int)vacTravel.Country;
                 cbxDestinationTD.SelectedIndex = num;
-
                 cbxDestinationTD.IsEnabled = false;
 
+
                 List<string> fill2 = addTravelWindow.fill;
-                ComboBox item2 = new();
 
                 foreach (string fill in fill2)
                 {
-                    item2.Text = fill;
-                    cbxPurposeTD.Items.Add(item2);
+                    cbxPurposeTD.Items.Add(fill);
                 }
 
                 cbxPurposeTD.SelectedIndex = 2;
+                cbxPurposeTD.IsEnabled = false;
+
+                List<PackingListItem> list = travel.PackingList;
+
+                lstPackingTD.ItemsSource = list;
+                lstPackingTD.IsEnabled = false;
 
 
 
@@ -71,7 +72,6 @@ namespace TravelPalSlutuppgift
 
                 cbAllInclusiveTD.Visibility = Visibility.Hidden;
                 txtQuantityTD.Visibility = Visibility.Hidden;
-                cbRequiredTD.Visibility = Visibility.Hidden;
 
                 txtCityTD.Text = workTravel.DestinationCity;
                 txtCityTD.IsEnabled = false;
@@ -82,13 +82,10 @@ namespace TravelPalSlutuppgift
                 txtMeetingDetailsTD.Text = workTravel.MeetingDetails;
                 txtMeetingDetailsTD.IsEnabled = false;
 
-                ComboBox item = new();
 
                 foreach (Countrys country in Countrys.GetValues(typeof(Countrys)))
                 {
-                    item.Tag = country;
-                    item.Text = country.ToString();
-                    cbxDestinationTD.Items.Add(item);
+                    cbxDestinationTD.Items.Add(country);
                 }
 
                 int num = (int)workTravel.Country;
@@ -97,15 +94,18 @@ namespace TravelPalSlutuppgift
                 cbxDestinationTD.IsEnabled = false;
 
                 List<string> fill2 = addTravelWindow.fill;
-                ComboBox item2 = new();
 
                 foreach (string fill in fill2)
                 {
-                    item2.Text = fill;
-                    cbxPurposeTD.Items.Add(item2);
+                    cbxPurposeTD.Items.Add(fill);
                 }
 
                 cbxPurposeTD.SelectedIndex = 1;
+                cbxPurposeTD.IsEnabled = false;
+
+                lstPackingTD.ItemsSource = travel.PackingList;
+                lstPackingTD.IsEnabled = false;
+
 
             }
 
